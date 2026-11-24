@@ -1,0 +1,81 @@
+# ----------------------------------------------------------------------
+
+# the decisions of the fueling bot (../frota-automacao-api), from a view of
+# the INTEGRATION source (frota-automacao-api/sql/view_vinculos.sql). The
+# view sets beside each decision what the operator did in the legacy system;
+# the panel only filters and orders on top
+
+# a forecast is checked again on every run while it is pending, so the last
+# check bounds the listing
+query GetVinculosAbastecimento($desde: datetime!) {
+  trip_fuel_view_vinculos(
+    where: { verificado_em: { _gte: $desde } }
+    order_by: { verificado_em: desc }
+  ) {
+    viagem_abastecimento_id
+    viagem_id
+    placa
+    numviag
+    sequencia
+    posto_id
+    nome_posto
+    litros_previsto
+    odometro_previsto
+    odometro_ajustado
+    id_abaposto
+    data_abastecimento
+    posto_id_realizado
+    litros_realizado
+    odometro_realizado
+    dif_km
+    dif_litros
+    candidatos
+    viagens_abertas
+    decisao
+    motivo
+    dry_run
+    created_at
+    verificado_em
+    status_legado
+    id_abaposto_legado
+    comparacao
+  }
+}
+
+# ----------------------------------------------------------------------
+
+# the links someone released to the bot (frota-automacao-api/sql/
+# vinculo_liberado.sql): the bot writes to the legacy system only these, and
+# only while its decision is the same fueling. Asked for by the forecasts on
+# the screen
+query GetLiberacoes($ids: [Int!]!) {
+  trip_fuel_vinculo_liberado(
+    where: { viagem_abastecimento_id: { _in: $ids } }
+  ) {
+    viagem_abastecimento_id
+    id_abaposto
+    user_name
+    liberado_em
+    status
+    erro
+    processado_em
+    lancamento_id
+  }
+}
+
+mutation InsertLiberacao($data: trip_fuel_vinculo_liberado_insert_input!) {
+  insert_trip_fuel_vinculo_liberado(objects: [$data]) {
+    affected_rows
+  }
+}
+
+# only in the statuses asked for: 'liberado' to cancel before the bot takes
+# it, 'erro'/'recusado' to release it again (Hasura's delete permission allows
+# just these three; what was written stays as history)
+mutation DeleteLiberacao($id: Int!, $status: [String!]!) {
+  delete_trip_fuel_vinculo_liberado(
+    where: { viagem_abastecimento_id: { _eq: $id }, status: { _in: $status } }
+  ) {
+    affected_rows
+  }
+}
