@@ -110,10 +110,6 @@ export default function Abastecimentos() {
     [vinculos, liberacoes],
   );
 
-  // only what the operator already did tells whether the bot was right
-  const acertos = vinculos.filter((v) => v.comparacao === 'acertou').length;
-  const decididos =
-    acertos + vinculos.filter((v) => v.comparacao === 'errou').length;
   const alertas = [...liberacoes.values()].filter(gravadoComAlerta).length;
 
   const lista = useMemo(() => {
@@ -167,15 +163,6 @@ export default function Abastecimentos() {
                 <Typography sx={{ color: theme.palette.error.main }}>
                   {alertas} vínculo(s) gravado(s) pelo bot mudaram no sistema
                   legado. Veja em Liberados.
-                </Typography>
-              )}
-              {decididos > 0 && (
-                <Typography sx={{ color: 'text.secondary' }}>
-                  Acerto do bot:{' '}
-                  {((100 * acertos) / decididos).toLocaleString('pt-br', {
-                    maximumFractionDigits: 1,
-                  })}
-                  % ({acertos} de {decididos})
                 </Typography>
               )}
               <SegmentedTabs

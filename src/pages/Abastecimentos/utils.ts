@@ -38,7 +38,7 @@ export const DECISAO_COLORS: Record<Decisao, Cor> = {
 };
 
 export const COMPARACAO_LABELS: Record<Comparacao, string> = {
-  acertou: 'Acertou',
+  acertou: 'Confere',
   errou: 'Errou',
   operador_vinculou: 'Operador',
   pendente: 'Pendente',

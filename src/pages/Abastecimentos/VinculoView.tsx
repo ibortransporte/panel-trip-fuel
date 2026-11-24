@@ -41,6 +41,10 @@ import {
 const formatData = (value: string | null) =>
   value ? format(new Date(value), 'dd/MM/yyyy HH:mm') : null;
 
+/** The fueling as the operator finds it on the legacy screen (not its id). */
+const descreverAbastecimento = (vinculo: Vinculo) =>
+  `${formatData(vinculo.data_abastecimento) ?? '-'} · ${formatNumero(vinculo.litros_realizado, 'L')} · odômetro ${formatNumero(vinculo.odometro_realizado, 'km')}`;
+
 // ----------------------------------------------------------------------
 
 export function VinculoView({
@@ -171,13 +175,13 @@ export function VinculoView({
             <Stack sx={{ gap: 1 }}>
               <Stack sx={{ flexDirection: 'row', gap: 1 }}>
                 <DataItem
-                  label="Abastecimento (AbaPosto)"
-                  value={vinculo.id_abaposto}
+                  label="Data"
+                  value={formatData(vinculo.data_abastecimento)}
                   sx={{ flex: 1 }}
                 />
                 <DataItem
-                  label="Data"
-                  value={formatData(vinculo.data_abastecimento)}
+                  label="Código interno"
+                  value={vinculo.id_abaposto}
                   sx={{ flex: 1 }}
                 />
               </Stack>
@@ -224,7 +228,12 @@ export function VinculoView({
             />
             <DataItem
               label="Abastecimento vinculado"
-              value={vinculo.id_abaposto_legado}
+              value={
+                vinculo.id_abaposto_legado !== null &&
+                vinculo.id_abaposto_legado === vinculo.id_abaposto
+                  ? 'O escolhido pelo bot'
+                  : vinculo.id_abaposto_legado
+              }
               sx={{ flex: 1 }}
             />
           </Stack>
@@ -288,8 +297,7 @@ function LiberacaoSection({
       <PanelBase.Section title="Liberar para o bot">
         <Stack sx={{ gap: 1, alignItems: 'flex-start' }}>
           <Typography sx={{ color: 'text.secondary' }}>
-            O bot vincula o abastecimento {vinculo.id_abaposto} na próxima
-            execução.
+            O bot vincula o abastecimento de {descreverAbastecimento(vinculo)}.
           </Typography>
           <Button
             variant="contained"
@@ -361,7 +369,11 @@ function LiberacaoSection({
         <Stack sx={{ flexDirection: 'row', gap: 1 }}>
           <DataItem
             label="Abastecimento liberado"
-            value={liberacao.id_abaposto}
+            value={
+              liberacao.id_abaposto === vinculo.id_abaposto
+                ? descreverAbastecimento(vinculo)
+                : liberacao.id_abaposto
+            }
             sx={{ flex: 1 }}
           />
           <DataItem
