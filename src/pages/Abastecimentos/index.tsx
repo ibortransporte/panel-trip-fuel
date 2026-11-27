@@ -7,14 +7,15 @@ import {
   PanelBase,
 } from '@fluxu-labs/lib';
 import { Stack, Typography, useTheme } from '@mui/material';
-import { endOfDay, format, startOfDay, subDays } from 'date-fns';
-import { useMemo, useState } from 'react';
+import { format } from 'date-fns';
+import { ReactNode, useMemo, useState } from 'react';
 import {
   GetLiberacoesDocument,
   GetVinculosAbastecimentoDocument,
 } from 'src/@types/generated/types';
 import { FAIcon } from 'src/components/FAIcon';
 import { SegmentedTabs } from 'src/components/SegmentedTabs';
+import { Arla } from './Arla';
 import {
   Comparacao,
   COMPARACAO_COLORS,
@@ -22,6 +23,8 @@ import {
   Decisao,
   DECISAO_COLORS,
   DECISAO_LABELS,
+  Filtro,
+  FILTRO_LABELS,
   formatNumero,
   gravadoComAlerta,
   Liberacao,
@@ -30,33 +33,42 @@ import {
   LiberacaoStatus,
   MODO_OBSERVACAO,
   podeLiberar,
+  POLL_MS,
+  ultimos7Dias,
   Vinculo,
 } from './utils';
 import { VinculoView } from './VinculoView';
 
 // ----------------------------------------------------------------------
 
-// the bot runs every 15 min: a minute is enough to follow it
-const POLL_MS = 60_000;
+/** Which fuelings the page shows: each has its own bot decisions. */
+type Aba = 'diesel' | 'arla';
 
-/** What the person has to look at, first. */
-type Filtro = 'para_liberar' | 'excecoes' | 'liberados' | 'todos';
-
-const FILTRO_LABELS: Record<Filtro, string> = {
-  para_liberar: 'Para liberar',
-  excecoes: 'Exceções',
-  liberados: 'Liberados',
-  todos: 'Todos',
+const ABA_LABELS: Record<Aba, string> = {
+  diesel: 'Diesel',
+  arla: 'ARLA',
 };
 
-const ultimos7Dias = (): DateRange => ({
-  start: startOfDay(subDays(new Date(), 6)),
-  end: endOfDay(new Date()),
-});
+export default function Abastecimentos() {
+  const [aba, setAba] = useState<Aba>('diesel');
+
+  const abas = (
+    <SegmentedTabs
+      value={aba}
+      onChange={setAba}
+      options={(Object.keys(ABA_LABELS) as Aba[]).map((value) => ({
+        value,
+        label: ABA_LABELS[value],
+      }))}
+    />
+  );
+
+  return aba === 'diesel' ? <Diesel abas={abas} /> : <Arla abas={abas} />;
+}
 
 // ----------------------------------------------------------------------
 
-export default function Abastecimentos() {
+function Diesel({ abas }: { abas: ReactNode }) {
   const theme = useTheme();
   const [range, setRange] = useState<DateRange>(ultimos7Dias);
 
@@ -146,6 +158,7 @@ export default function Abastecimentos() {
           content="Vínculo de abastecimentos"
           actions={
             <Stack sx={{ flexDirection: 'row', gap: 1, alignItems: 'center' }}>
+              {abas}
               {MODO_OBSERVACAO && (
                 <Chip dense color={theme.palette.info.main}>
                   Observação
