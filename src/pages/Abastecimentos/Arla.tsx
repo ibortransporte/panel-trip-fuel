@@ -124,7 +124,6 @@ export function Arla({ abas }: { abas: ReactNode }) {
           content="Vínculo de abastecimentos"
           actions={
             <Stack sx={{ flexDirection: 'row', gap: 1, alignItems: 'center' }}>
-              {abas}
               {MODO_OBSERVACAO && (
                 <Chip dense color={theme.palette.info.main}>
                   Observação
@@ -138,6 +137,7 @@ export function Arla({ abas }: { abas: ReactNode }) {
           }
           bottomComponent={
             <Stack sx={{ gap: 1 }}>
+              {abas}
               {alertas > 0 && (
                 <Typography sx={{ color: theme.palette.error.main }}>
                   {alertas} ARLA gravado(s) pelo bot mudaram no sistema legado.
