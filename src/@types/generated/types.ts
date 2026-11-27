@@ -38,6 +38,7 @@ export type Scalars = {
   timestamp: { input: Date | string; output: string; }
   timestamptz: { input: Date | string; output: string; }
   tracker_device_model: { input: unknown; output: unknown; }
+  uniqueidentifier: { input: unknown; output: unknown; }
   uuid: { input: string; output: string; }
   vector: { input: unknown; output: unknown; }
 };
@@ -57,6 +58,1071 @@ export type AppSigninOutput = {
   token: Scalars['String']['output'];
   user: Maybe<User>;
   user_uuid: Maybe<Scalars['uuid']['output']>;
+};
+
+/** columns and relationships of "AudioStudioTake" */
+export type AudioStudioTake = {
+  __typename?: 'AudioStudioTake';
+  Analysis: Maybe<Scalars['String']['output']>;
+  ArchivedAt: Maybe<Scalars['datetime2']['output']>;
+  Bytes: Scalars['Int']['output'];
+  CheckOk: Maybe<Scalars['Boolean']['output']>;
+  CheckText: Maybe<Scalars['String']['output']>;
+  CreatedAt: Scalars['datetime2']['output'];
+  CreatedBy: Scalars['uniqueidentifier']['output'];
+  CreditCost: Maybe<Scalars['Int']['output']>;
+  DurationMs: Scalars['Int']['output'];
+  Id: Scalars['uniqueidentifier']['output'];
+  Model: Scalars['String']['output'];
+  Provider: Scalars['String']['output'];
+  ProviderRequestId: Maybe<Scalars['String']['output']>;
+  S3Key: Scalars['String']['output'];
+  Sha256: Scalars['String']['output'];
+  SpokenText: Scalars['String']['output'];
+  Stability: Scalars['Float']['output'];
+  Style: Scalars['Float']['output'];
+  Text: Scalars['String']['output'];
+  VoiceId: Scalars['String']['output'];
+  VoiceName: Scalars['String']['output'];
+  /** An array relationship */
+  versions: Array<AudioStudioVersion>;
+  /** An aggregate relationship */
+  versions_aggregate: AudioStudioVersion_Aggregate;
+};
+
+
+/** columns and relationships of "AudioStudioTake" */
+export type AudioStudioTakeVersionsArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioVersion_Order_By>>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+
+/** columns and relationships of "AudioStudioTake" */
+export type AudioStudioTakeVersions_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioVersion_Order_By>>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+/** aggregated selection of "AudioStudioTake" */
+export type AudioStudioTake_Aggregate = {
+  __typename?: 'AudioStudioTake_aggregate';
+  aggregate: Maybe<AudioStudioTake_Aggregate_Fields>;
+  nodes: Array<AudioStudioTake>;
+};
+
+/** aggregate fields of "AudioStudioTake" */
+export type AudioStudioTake_Aggregate_Fields = {
+  __typename?: 'AudioStudioTake_aggregate_fields';
+  avg: Maybe<AudioStudioTake_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max: Maybe<AudioStudioTake_Max_Fields>;
+  min: Maybe<AudioStudioTake_Min_Fields>;
+  stddev: Maybe<AudioStudioTake_Stddev_Fields>;
+  stddev_pop: Maybe<AudioStudioTake_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<AudioStudioTake_Stddev_Samp_Fields>;
+  sum: Maybe<AudioStudioTake_Sum_Fields>;
+  var_pop: Maybe<AudioStudioTake_Var_Pop_Fields>;
+  var_samp: Maybe<AudioStudioTake_Var_Samp_Fields>;
+  variance: Maybe<AudioStudioTake_Variance_Fields>;
+};
+
+
+/** aggregate fields of "AudioStudioTake" */
+export type AudioStudioTake_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<AudioStudioTake_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type AudioStudioTake_Avg_Fields = {
+  __typename?: 'AudioStudioTake_avg_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "AudioStudioTake". All fields are combined with a logical 'AND'. */
+export type AudioStudioTake_Bool_Exp = {
+  Analysis?: InputMaybe<String_Mssql_Comparison_Exp>;
+  ArchivedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  Bytes?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  CheckOk?: InputMaybe<Boolean_Mssql_Comparison_Exp>;
+  CheckText?: InputMaybe<String_Mssql_Comparison_Exp>;
+  CreatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  CreatedBy?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  CreditCost?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  DurationMs?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  Id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  Model?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Provider?: InputMaybe<String_Mssql_Comparison_Exp>;
+  ProviderRequestId?: InputMaybe<String_Mssql_Comparison_Exp>;
+  S3Key?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Sha256?: InputMaybe<String_Mssql_Comparison_Exp>;
+  SpokenText?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Stability?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  Style?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  Text?: InputMaybe<String_Mssql_Comparison_Exp>;
+  VoiceId?: InputMaybe<String_Mssql_Comparison_Exp>;
+  VoiceName?: InputMaybe<String_Mssql_Comparison_Exp>;
+  _and?: InputMaybe<Array<AudioStudioTake_Bool_Exp>>;
+  _not?: InputMaybe<AudioStudioTake_Bool_Exp>;
+  _or?: InputMaybe<Array<AudioStudioTake_Bool_Exp>>;
+  versions?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+/** upsert condition type for table "AudioStudioTake" */
+export type AudioStudioTake_If_Matched = {
+  match_columns?: Array<AudioStudioTake_Insert_Match_Column>;
+  update_columns?: Array<AudioStudioTake_Update_Column>;
+  where?: InputMaybe<AudioStudioTake_Bool_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "AudioStudioTake" */
+export type AudioStudioTake_Inc_Input = {
+  Bytes?: InputMaybe<Scalars['Int']['input']>;
+  CreditCost?: InputMaybe<Scalars['Int']['input']>;
+  DurationMs?: InputMaybe<Scalars['Int']['input']>;
+  Stability?: InputMaybe<Scalars['Float']['input']>;
+  Style?: InputMaybe<Scalars['Float']['input']>;
+};
+
+/** input type for inserting data into table "AudioStudioTake" */
+export type AudioStudioTake_Insert_Input = {
+  Analysis?: InputMaybe<Scalars['String']['input']>;
+  ArchivedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  Bytes?: InputMaybe<Scalars['Int']['input']>;
+  CheckOk?: InputMaybe<Scalars['Boolean']['input']>;
+  CheckText?: InputMaybe<Scalars['String']['input']>;
+  CreatedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  CreatedBy?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  CreditCost?: InputMaybe<Scalars['Int']['input']>;
+  DurationMs?: InputMaybe<Scalars['Int']['input']>;
+  Id?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  Model?: InputMaybe<Scalars['String']['input']>;
+  Provider?: InputMaybe<Scalars['String']['input']>;
+  ProviderRequestId?: InputMaybe<Scalars['String']['input']>;
+  S3Key?: InputMaybe<Scalars['String']['input']>;
+  Sha256?: InputMaybe<Scalars['String']['input']>;
+  SpokenText?: InputMaybe<Scalars['String']['input']>;
+  Stability?: InputMaybe<Scalars['Float']['input']>;
+  Style?: InputMaybe<Scalars['Float']['input']>;
+  Text?: InputMaybe<Scalars['String']['input']>;
+  VoiceId?: InputMaybe<Scalars['String']['input']>;
+  VoiceName?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** select match_columns of table "AudioStudioTake" */
+export enum AudioStudioTake_Insert_Match_Column {
+  /** column name */
+  Analysis = 'Analysis',
+  /** column name */
+  ArchivedAt = 'ArchivedAt',
+  /** column name */
+  Bytes = 'Bytes',
+  /** column name */
+  CheckOk = 'CheckOk',
+  /** column name */
+  CheckText = 'CheckText',
+  /** column name */
+  CreatedAt = 'CreatedAt',
+  /** column name */
+  CreatedBy = 'CreatedBy',
+  /** column name */
+  CreditCost = 'CreditCost',
+  /** column name */
+  DurationMs = 'DurationMs',
+  /** column name */
+  Id = 'Id',
+  /** column name */
+  Model = 'Model',
+  /** column name */
+  Provider = 'Provider',
+  /** column name */
+  ProviderRequestId = 'ProviderRequestId',
+  /** column name */
+  S3Key = 'S3Key',
+  /** column name */
+  Sha256 = 'Sha256',
+  /** column name */
+  SpokenText = 'SpokenText',
+  /** column name */
+  Stability = 'Stability',
+  /** column name */
+  Style = 'Style',
+  /** column name */
+  Text = 'Text',
+  /** column name */
+  VoiceId = 'VoiceId',
+  /** column name */
+  VoiceName = 'VoiceName'
+}
+
+/** aggregate max on columns */
+export type AudioStudioTake_Max_Fields = {
+  __typename?: 'AudioStudioTake_max_fields';
+  Analysis: Maybe<Scalars['String']['output']>;
+  ArchivedAt: Maybe<Scalars['datetime2']['output']>;
+  Bytes: Maybe<Scalars['Int']['output']>;
+  CheckText: Maybe<Scalars['String']['output']>;
+  CreatedAt: Maybe<Scalars['datetime2']['output']>;
+  CreditCost: Maybe<Scalars['Int']['output']>;
+  DurationMs: Maybe<Scalars['Int']['output']>;
+  Model: Maybe<Scalars['String']['output']>;
+  Provider: Maybe<Scalars['String']['output']>;
+  ProviderRequestId: Maybe<Scalars['String']['output']>;
+  S3Key: Maybe<Scalars['String']['output']>;
+  Sha256: Maybe<Scalars['String']['output']>;
+  SpokenText: Maybe<Scalars['String']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+  Text: Maybe<Scalars['String']['output']>;
+  VoiceId: Maybe<Scalars['String']['output']>;
+  VoiceName: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type AudioStudioTake_Min_Fields = {
+  __typename?: 'AudioStudioTake_min_fields';
+  Analysis: Maybe<Scalars['String']['output']>;
+  ArchivedAt: Maybe<Scalars['datetime2']['output']>;
+  Bytes: Maybe<Scalars['Int']['output']>;
+  CheckText: Maybe<Scalars['String']['output']>;
+  CreatedAt: Maybe<Scalars['datetime2']['output']>;
+  CreditCost: Maybe<Scalars['Int']['output']>;
+  DurationMs: Maybe<Scalars['Int']['output']>;
+  Model: Maybe<Scalars['String']['output']>;
+  Provider: Maybe<Scalars['String']['output']>;
+  ProviderRequestId: Maybe<Scalars['String']['output']>;
+  S3Key: Maybe<Scalars['String']['output']>;
+  Sha256: Maybe<Scalars['String']['output']>;
+  SpokenText: Maybe<Scalars['String']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+  Text: Maybe<Scalars['String']['output']>;
+  VoiceId: Maybe<Scalars['String']['output']>;
+  VoiceName: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "AudioStudioTake" */
+export type AudioStudioTake_Mutation_Response = {
+  __typename?: 'AudioStudioTake_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AudioStudioTake>;
+};
+
+/** Ordering options when selecting data from "AudioStudioTake". */
+export type AudioStudioTake_Order_By = {
+  Analysis?: InputMaybe<Order_By>;
+  ArchivedAt?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  CheckOk?: InputMaybe<Order_By>;
+  CheckText?: InputMaybe<Order_By>;
+  CreatedAt?: InputMaybe<Order_By>;
+  CreatedBy?: InputMaybe<Order_By>;
+  CreditCost?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  Id?: InputMaybe<Order_By>;
+  Model?: InputMaybe<Order_By>;
+  Provider?: InputMaybe<Order_By>;
+  ProviderRequestId?: InputMaybe<Order_By>;
+  S3Key?: InputMaybe<Order_By>;
+  Sha256?: InputMaybe<Order_By>;
+  SpokenText?: InputMaybe<Order_By>;
+  Stability?: InputMaybe<Order_By>;
+  Style?: InputMaybe<Order_By>;
+  Text?: InputMaybe<Order_By>;
+  VoiceId?: InputMaybe<Order_By>;
+  VoiceName?: InputMaybe<Order_By>;
+  versions_aggregate?: InputMaybe<AudioStudioVersion_Aggregate_Order_By>;
+};
+
+/** primary key columns input for table: AudioStudioTake */
+export type AudioStudioTake_Pk_Columns_Input = {
+  Id: Scalars['uniqueidentifier']['input'];
+};
+
+/** select columns of table "AudioStudioTake" */
+export enum AudioStudioTake_Select_Column {
+  /** column name */
+  Analysis = 'Analysis',
+  /** column name */
+  ArchivedAt = 'ArchivedAt',
+  /** column name */
+  Bytes = 'Bytes',
+  /** column name */
+  CheckOk = 'CheckOk',
+  /** column name */
+  CheckText = 'CheckText',
+  /** column name */
+  CreatedAt = 'CreatedAt',
+  /** column name */
+  CreatedBy = 'CreatedBy',
+  /** column name */
+  CreditCost = 'CreditCost',
+  /** column name */
+  DurationMs = 'DurationMs',
+  /** column name */
+  Id = 'Id',
+  /** column name */
+  Model = 'Model',
+  /** column name */
+  Provider = 'Provider',
+  /** column name */
+  ProviderRequestId = 'ProviderRequestId',
+  /** column name */
+  S3Key = 'S3Key',
+  /** column name */
+  Sha256 = 'Sha256',
+  /** column name */
+  SpokenText = 'SpokenText',
+  /** column name */
+  Stability = 'Stability',
+  /** column name */
+  Style = 'Style',
+  /** column name */
+  Text = 'Text',
+  /** column name */
+  VoiceId = 'VoiceId',
+  /** column name */
+  VoiceName = 'VoiceName'
+}
+
+/** input type for updating data in table "AudioStudioTake" */
+export type AudioStudioTake_Set_Input = {
+  Analysis?: InputMaybe<Scalars['String']['input']>;
+  ArchivedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  Bytes?: InputMaybe<Scalars['Int']['input']>;
+  CheckOk?: InputMaybe<Scalars['Boolean']['input']>;
+  CheckText?: InputMaybe<Scalars['String']['input']>;
+  CreatedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  CreatedBy?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  CreditCost?: InputMaybe<Scalars['Int']['input']>;
+  DurationMs?: InputMaybe<Scalars['Int']['input']>;
+  Id?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  Model?: InputMaybe<Scalars['String']['input']>;
+  Provider?: InputMaybe<Scalars['String']['input']>;
+  ProviderRequestId?: InputMaybe<Scalars['String']['input']>;
+  S3Key?: InputMaybe<Scalars['String']['input']>;
+  Sha256?: InputMaybe<Scalars['String']['input']>;
+  SpokenText?: InputMaybe<Scalars['String']['input']>;
+  Stability?: InputMaybe<Scalars['Float']['input']>;
+  Style?: InputMaybe<Scalars['Float']['input']>;
+  Text?: InputMaybe<Scalars['String']['input']>;
+  VoiceId?: InputMaybe<Scalars['String']['input']>;
+  VoiceName?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type AudioStudioTake_Stddev_Fields = {
+  __typename?: 'AudioStudioTake_stddev_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type AudioStudioTake_Stddev_Pop_Fields = {
+  __typename?: 'AudioStudioTake_stddev_pop_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type AudioStudioTake_Stddev_Samp_Fields = {
+  __typename?: 'AudioStudioTake_stddev_samp_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate sum on columns */
+export type AudioStudioTake_Sum_Fields = {
+  __typename?: 'AudioStudioTake_sum_fields';
+  Bytes: Maybe<Scalars['Int']['output']>;
+  CreditCost: Maybe<Scalars['Int']['output']>;
+  DurationMs: Maybe<Scalars['Int']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** update columns of table "AudioStudioTake" */
+export enum AudioStudioTake_Update_Column {
+  /** column name */
+  Analysis = 'Analysis',
+  /** column name */
+  ArchivedAt = 'ArchivedAt',
+  /** column name */
+  Bytes = 'Bytes',
+  /** column name */
+  CheckOk = 'CheckOk',
+  /** column name */
+  CheckText = 'CheckText',
+  /** column name */
+  CreatedAt = 'CreatedAt',
+  /** column name */
+  CreatedBy = 'CreatedBy',
+  /** column name */
+  CreditCost = 'CreditCost',
+  /** column name */
+  DurationMs = 'DurationMs',
+  /** column name */
+  Id = 'Id',
+  /** column name */
+  Model = 'Model',
+  /** column name */
+  Provider = 'Provider',
+  /** column name */
+  ProviderRequestId = 'ProviderRequestId',
+  /** column name */
+  S3Key = 'S3Key',
+  /** column name */
+  Sha256 = 'Sha256',
+  /** column name */
+  SpokenText = 'SpokenText',
+  /** column name */
+  Stability = 'Stability',
+  /** column name */
+  Style = 'Style',
+  /** column name */
+  Text = 'Text',
+  /** column name */
+  VoiceId = 'VoiceId',
+  /** column name */
+  VoiceName = 'VoiceName'
+}
+
+/** aggregate var_pop on columns */
+export type AudioStudioTake_Var_Pop_Fields = {
+  __typename?: 'AudioStudioTake_var_pop_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type AudioStudioTake_Var_Samp_Fields = {
+  __typename?: 'AudioStudioTake_var_samp_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type AudioStudioTake_Variance_Fields = {
+  __typename?: 'AudioStudioTake_variance_fields';
+  Bytes: Maybe<Scalars['Float']['output']>;
+  CreditCost: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  Stability: Maybe<Scalars['Float']['output']>;
+  Style: Maybe<Scalars['Float']['output']>;
+};
+
+/** columns and relationships of "AudioStudioVersion" */
+export type AudioStudioVersion = {
+  __typename?: 'AudioStudioVersion';
+  ArchivedAt: Maybe<Scalars['datetime2']['output']>;
+  BitrateKbps: Scalars['Int']['output'];
+  Bytes: Scalars['Int']['output'];
+  CreatedAt: Scalars['datetime2']['output'];
+  CreatedBy: Scalars['uniqueidentifier']['output'];
+  DurationMs: Scalars['Int']['output'];
+  GainReducedDb: Scalars['Float']['output'];
+  Id: Scalars['uniqueidentifier']['output'];
+  MeanDb: Scalars['Float']['output'];
+  Name: Maybe<Scalars['String']['output']>;
+  Notes: Maybe<Scalars['String']['output']>;
+  PipelineVersion: Scalars['Int']['output'];
+  S3Key: Scalars['String']['output'];
+  Settings: Scalars['String']['output'];
+  SettingsHash: Scalars['String']['output'];
+  Sha256: Scalars['String']['output'];
+  TakeId: Scalars['uniqueidentifier']['output'];
+  TruePeakDb: Scalars['Float']['output'];
+  Vbr: Scalars['Boolean']['output'];
+  /** An object relationship */
+  take: AudioStudioTake;
+};
+
+/** aggregated selection of "AudioStudioVersion" */
+export type AudioStudioVersion_Aggregate = {
+  __typename?: 'AudioStudioVersion_aggregate';
+  aggregate: Maybe<AudioStudioVersion_Aggregate_Fields>;
+  nodes: Array<AudioStudioVersion>;
+};
+
+/** aggregate fields of "AudioStudioVersion" */
+export type AudioStudioVersion_Aggregate_Fields = {
+  __typename?: 'AudioStudioVersion_aggregate_fields';
+  avg: Maybe<AudioStudioVersion_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max: Maybe<AudioStudioVersion_Max_Fields>;
+  min: Maybe<AudioStudioVersion_Min_Fields>;
+  stddev: Maybe<AudioStudioVersion_Stddev_Fields>;
+  stddev_pop: Maybe<AudioStudioVersion_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<AudioStudioVersion_Stddev_Samp_Fields>;
+  sum: Maybe<AudioStudioVersion_Sum_Fields>;
+  var_pop: Maybe<AudioStudioVersion_Var_Pop_Fields>;
+  var_samp: Maybe<AudioStudioVersion_Var_Samp_Fields>;
+  variance: Maybe<AudioStudioVersion_Variance_Fields>;
+};
+
+
+/** aggregate fields of "AudioStudioVersion" */
+export type AudioStudioVersion_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<AudioStudioVersion_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** order by aggregate values of table "AudioStudioVersion" */
+export type AudioStudioVersion_Aggregate_Order_By = {
+  avg?: InputMaybe<AudioStudioVersion_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<AudioStudioVersion_Max_Order_By>;
+  min?: InputMaybe<AudioStudioVersion_Min_Order_By>;
+  stddev?: InputMaybe<AudioStudioVersion_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<AudioStudioVersion_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<AudioStudioVersion_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<AudioStudioVersion_Sum_Order_By>;
+  var_pop?: InputMaybe<AudioStudioVersion_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<AudioStudioVersion_Var_Samp_Order_By>;
+  variance?: InputMaybe<AudioStudioVersion_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type AudioStudioVersion_Avg_Fields = {
+  __typename?: 'AudioStudioVersion_avg_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Avg_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "AudioStudioVersion". All fields are combined with a logical 'AND'. */
+export type AudioStudioVersion_Bool_Exp = {
+  ArchivedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  BitrateKbps?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  Bytes?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  CreatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  CreatedBy?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  DurationMs?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  GainReducedDb?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  Id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  MeanDb?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  Name?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Notes?: InputMaybe<String_Mssql_Comparison_Exp>;
+  PipelineVersion?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  S3Key?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Settings?: InputMaybe<String_Mssql_Comparison_Exp>;
+  SettingsHash?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Sha256?: InputMaybe<String_Mssql_Comparison_Exp>;
+  TakeId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  TruePeakDb?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  Vbr?: InputMaybe<Boolean_Mssql_Comparison_Exp>;
+  _and?: InputMaybe<Array<AudioStudioVersion_Bool_Exp>>;
+  _not?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+  _or?: InputMaybe<Array<AudioStudioVersion_Bool_Exp>>;
+  take?: InputMaybe<AudioStudioTake_Bool_Exp>;
+};
+
+/** upsert condition type for table "AudioStudioVersion" */
+export type AudioStudioVersion_If_Matched = {
+  match_columns?: Array<AudioStudioVersion_Insert_Match_Column>;
+  update_columns?: Array<AudioStudioVersion_Update_Column>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "AudioStudioVersion" */
+export type AudioStudioVersion_Inc_Input = {
+  BitrateKbps?: InputMaybe<Scalars['Int']['input']>;
+  Bytes?: InputMaybe<Scalars['Int']['input']>;
+  DurationMs?: InputMaybe<Scalars['Int']['input']>;
+  GainReducedDb?: InputMaybe<Scalars['Float']['input']>;
+  MeanDb?: InputMaybe<Scalars['Float']['input']>;
+  PipelineVersion?: InputMaybe<Scalars['Int']['input']>;
+  TruePeakDb?: InputMaybe<Scalars['Float']['input']>;
+};
+
+/** input type for inserting data into table "AudioStudioVersion" */
+export type AudioStudioVersion_Insert_Input = {
+  ArchivedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  BitrateKbps?: InputMaybe<Scalars['Int']['input']>;
+  Bytes?: InputMaybe<Scalars['Int']['input']>;
+  CreatedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  CreatedBy?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  DurationMs?: InputMaybe<Scalars['Int']['input']>;
+  GainReducedDb?: InputMaybe<Scalars['Float']['input']>;
+  Id?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  MeanDb?: InputMaybe<Scalars['Float']['input']>;
+  Name?: InputMaybe<Scalars['String']['input']>;
+  Notes?: InputMaybe<Scalars['String']['input']>;
+  PipelineVersion?: InputMaybe<Scalars['Int']['input']>;
+  S3Key?: InputMaybe<Scalars['String']['input']>;
+  Settings?: InputMaybe<Scalars['String']['input']>;
+  SettingsHash?: InputMaybe<Scalars['String']['input']>;
+  Sha256?: InputMaybe<Scalars['String']['input']>;
+  TakeId?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  TruePeakDb?: InputMaybe<Scalars['Float']['input']>;
+  Vbr?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** select match_columns of table "AudioStudioVersion" */
+export enum AudioStudioVersion_Insert_Match_Column {
+  /** column name */
+  ArchivedAt = 'ArchivedAt',
+  /** column name */
+  BitrateKbps = 'BitrateKbps',
+  /** column name */
+  Bytes = 'Bytes',
+  /** column name */
+  CreatedAt = 'CreatedAt',
+  /** column name */
+  CreatedBy = 'CreatedBy',
+  /** column name */
+  DurationMs = 'DurationMs',
+  /** column name */
+  GainReducedDb = 'GainReducedDb',
+  /** column name */
+  Id = 'Id',
+  /** column name */
+  MeanDb = 'MeanDb',
+  /** column name */
+  Name = 'Name',
+  /** column name */
+  Notes = 'Notes',
+  /** column name */
+  PipelineVersion = 'PipelineVersion',
+  /** column name */
+  S3Key = 'S3Key',
+  /** column name */
+  Settings = 'Settings',
+  /** column name */
+  SettingsHash = 'SettingsHash',
+  /** column name */
+  Sha256 = 'Sha256',
+  /** column name */
+  TakeId = 'TakeId',
+  /** column name */
+  TruePeakDb = 'TruePeakDb',
+  /** column name */
+  Vbr = 'Vbr'
+}
+
+/** aggregate max on columns */
+export type AudioStudioVersion_Max_Fields = {
+  __typename?: 'AudioStudioVersion_max_fields';
+  ArchivedAt: Maybe<Scalars['datetime2']['output']>;
+  BitrateKbps: Maybe<Scalars['Int']['output']>;
+  Bytes: Maybe<Scalars['Int']['output']>;
+  CreatedAt: Maybe<Scalars['datetime2']['output']>;
+  DurationMs: Maybe<Scalars['Int']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  Name: Maybe<Scalars['String']['output']>;
+  Notes: Maybe<Scalars['String']['output']>;
+  PipelineVersion: Maybe<Scalars['Int']['output']>;
+  S3Key: Maybe<Scalars['String']['output']>;
+  Settings: Maybe<Scalars['String']['output']>;
+  SettingsHash: Maybe<Scalars['String']['output']>;
+  Sha256: Maybe<Scalars['String']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by max() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Max_Order_By = {
+  ArchivedAt?: InputMaybe<Order_By>;
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  CreatedAt?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  Name?: InputMaybe<Order_By>;
+  Notes?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  S3Key?: InputMaybe<Order_By>;
+  Settings?: InputMaybe<Order_By>;
+  SettingsHash?: InputMaybe<Order_By>;
+  Sha256?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type AudioStudioVersion_Min_Fields = {
+  __typename?: 'AudioStudioVersion_min_fields';
+  ArchivedAt: Maybe<Scalars['datetime2']['output']>;
+  BitrateKbps: Maybe<Scalars['Int']['output']>;
+  Bytes: Maybe<Scalars['Int']['output']>;
+  CreatedAt: Maybe<Scalars['datetime2']['output']>;
+  DurationMs: Maybe<Scalars['Int']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  Name: Maybe<Scalars['String']['output']>;
+  Notes: Maybe<Scalars['String']['output']>;
+  PipelineVersion: Maybe<Scalars['Int']['output']>;
+  S3Key: Maybe<Scalars['String']['output']>;
+  Settings: Maybe<Scalars['String']['output']>;
+  SettingsHash: Maybe<Scalars['String']['output']>;
+  Sha256: Maybe<Scalars['String']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by min() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Min_Order_By = {
+  ArchivedAt?: InputMaybe<Order_By>;
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  CreatedAt?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  Name?: InputMaybe<Order_By>;
+  Notes?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  S3Key?: InputMaybe<Order_By>;
+  Settings?: InputMaybe<Order_By>;
+  SettingsHash?: InputMaybe<Order_By>;
+  Sha256?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "AudioStudioVersion" */
+export type AudioStudioVersion_Mutation_Response = {
+  __typename?: 'AudioStudioVersion_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AudioStudioVersion>;
+};
+
+/** Ordering options when selecting data from "AudioStudioVersion". */
+export type AudioStudioVersion_Order_By = {
+  ArchivedAt?: InputMaybe<Order_By>;
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  CreatedAt?: InputMaybe<Order_By>;
+  CreatedBy?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  Id?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  Name?: InputMaybe<Order_By>;
+  Notes?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  S3Key?: InputMaybe<Order_By>;
+  Settings?: InputMaybe<Order_By>;
+  SettingsHash?: InputMaybe<Order_By>;
+  Sha256?: InputMaybe<Order_By>;
+  TakeId?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+  Vbr?: InputMaybe<Order_By>;
+  take?: InputMaybe<AudioStudioTake_Order_By>;
+};
+
+/** primary key columns input for table: AudioStudioVersion */
+export type AudioStudioVersion_Pk_Columns_Input = {
+  Id: Scalars['uniqueidentifier']['input'];
+};
+
+/** select columns of table "AudioStudioVersion" */
+export enum AudioStudioVersion_Select_Column {
+  /** column name */
+  ArchivedAt = 'ArchivedAt',
+  /** column name */
+  BitrateKbps = 'BitrateKbps',
+  /** column name */
+  Bytes = 'Bytes',
+  /** column name */
+  CreatedAt = 'CreatedAt',
+  /** column name */
+  CreatedBy = 'CreatedBy',
+  /** column name */
+  DurationMs = 'DurationMs',
+  /** column name */
+  GainReducedDb = 'GainReducedDb',
+  /** column name */
+  Id = 'Id',
+  /** column name */
+  MeanDb = 'MeanDb',
+  /** column name */
+  Name = 'Name',
+  /** column name */
+  Notes = 'Notes',
+  /** column name */
+  PipelineVersion = 'PipelineVersion',
+  /** column name */
+  S3Key = 'S3Key',
+  /** column name */
+  Settings = 'Settings',
+  /** column name */
+  SettingsHash = 'SettingsHash',
+  /** column name */
+  Sha256 = 'Sha256',
+  /** column name */
+  TakeId = 'TakeId',
+  /** column name */
+  TruePeakDb = 'TruePeakDb',
+  /** column name */
+  Vbr = 'Vbr'
+}
+
+/** input type for updating data in table "AudioStudioVersion" */
+export type AudioStudioVersion_Set_Input = {
+  ArchivedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  BitrateKbps?: InputMaybe<Scalars['Int']['input']>;
+  Bytes?: InputMaybe<Scalars['Int']['input']>;
+  CreatedAt?: InputMaybe<Scalars['datetime2']['input']>;
+  CreatedBy?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  DurationMs?: InputMaybe<Scalars['Int']['input']>;
+  GainReducedDb?: InputMaybe<Scalars['Float']['input']>;
+  Id?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  MeanDb?: InputMaybe<Scalars['Float']['input']>;
+  Name?: InputMaybe<Scalars['String']['input']>;
+  Notes?: InputMaybe<Scalars['String']['input']>;
+  PipelineVersion?: InputMaybe<Scalars['Int']['input']>;
+  S3Key?: InputMaybe<Scalars['String']['input']>;
+  Settings?: InputMaybe<Scalars['String']['input']>;
+  SettingsHash?: InputMaybe<Scalars['String']['input']>;
+  Sha256?: InputMaybe<Scalars['String']['input']>;
+  TakeId?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  TruePeakDb?: InputMaybe<Scalars['Float']['input']>;
+  Vbr?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type AudioStudioVersion_Stddev_Fields = {
+  __typename?: 'AudioStudioVersion_stddev_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Stddev_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type AudioStudioVersion_Stddev_Pop_Fields = {
+  __typename?: 'AudioStudioVersion_stddev_pop_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_pop() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Stddev_Pop_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type AudioStudioVersion_Stddev_Samp_Fields = {
+  __typename?: 'AudioStudioVersion_stddev_samp_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Stddev_Samp_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type AudioStudioVersion_Sum_Fields = {
+  __typename?: 'AudioStudioVersion_sum_fields';
+  BitrateKbps: Maybe<Scalars['Int']['output']>;
+  Bytes: Maybe<Scalars['Int']['output']>;
+  DurationMs: Maybe<Scalars['Int']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Int']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by sum() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Sum_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "AudioStudioVersion" */
+export enum AudioStudioVersion_Update_Column {
+  /** column name */
+  ArchivedAt = 'ArchivedAt',
+  /** column name */
+  BitrateKbps = 'BitrateKbps',
+  /** column name */
+  Bytes = 'Bytes',
+  /** column name */
+  CreatedAt = 'CreatedAt',
+  /** column name */
+  CreatedBy = 'CreatedBy',
+  /** column name */
+  DurationMs = 'DurationMs',
+  /** column name */
+  GainReducedDb = 'GainReducedDb',
+  /** column name */
+  Id = 'Id',
+  /** column name */
+  MeanDb = 'MeanDb',
+  /** column name */
+  Name = 'Name',
+  /** column name */
+  Notes = 'Notes',
+  /** column name */
+  PipelineVersion = 'PipelineVersion',
+  /** column name */
+  S3Key = 'S3Key',
+  /** column name */
+  Settings = 'Settings',
+  /** column name */
+  SettingsHash = 'SettingsHash',
+  /** column name */
+  Sha256 = 'Sha256',
+  /** column name */
+  TakeId = 'TakeId',
+  /** column name */
+  TruePeakDb = 'TruePeakDb',
+  /** column name */
+  Vbr = 'Vbr'
+}
+
+/** aggregate var_pop on columns */
+export type AudioStudioVersion_Var_Pop_Fields = {
+  __typename?: 'AudioStudioVersion_var_pop_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_pop() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Var_Pop_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type AudioStudioVersion_Var_Samp_Fields = {
+  __typename?: 'AudioStudioVersion_var_samp_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_samp() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Var_Samp_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type AudioStudioVersion_Variance_Fields = {
+  __typename?: 'AudioStudioVersion_variance_fields';
+  BitrateKbps: Maybe<Scalars['Float']['output']>;
+  Bytes: Maybe<Scalars['Float']['output']>;
+  DurationMs: Maybe<Scalars['Float']['output']>;
+  GainReducedDb: Maybe<Scalars['Float']['output']>;
+  MeanDb: Maybe<Scalars['Float']['output']>;
+  PipelineVersion: Maybe<Scalars['Float']['output']>;
+  TruePeakDb: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "AudioStudioVersion" */
+export type AudioStudioVersion_Variance_Order_By = {
+  BitrateKbps?: InputMaybe<Order_By>;
+  Bytes?: InputMaybe<Order_By>;
+  DurationMs?: InputMaybe<Order_By>;
+  GainReducedDb?: InputMaybe<Order_By>;
+  MeanDb?: InputMaybe<Order_By>;
+  PipelineVersion?: InputMaybe<Order_By>;
+  TruePeakDb?: InputMaybe<Order_By>;
 };
 
 export type BleUnlockConfirmCpfOutput = {
@@ -30120,6 +31186,8 @@ export type Config = {
   ips_by_delivery_before_confirmation: Scalars['Int']['output'];
   min_android_version: Maybe<Scalars['String']['output']>;
   min_ios_version: Maybe<Scalars['String']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
   /** The id that is used to send the driver warnings to. Is the group that receives the driver warnings. The id comes from whatsapp-web.js */
   whatsapp_warnings_chat_id: Maybe<Scalars['String']['output']>;
 };
@@ -30162,6 +31230,8 @@ export type Config_Avg_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "config". All fields are combined with a logical 'AND'. */
@@ -30178,6 +31248,7 @@ export type Config_Bool_Exp = {
   ips_by_delivery_before_confirmation?: InputMaybe<Int_Comparison_Exp>;
   min_android_version?: InputMaybe<String_Comparison_Exp>;
   min_ios_version?: InputMaybe<String_Comparison_Exp>;
+  receipt_points_window_minutes?: InputMaybe<Int_Comparison_Exp>;
   whatsapp_warnings_chat_id?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -30193,6 +31264,8 @@ export type Config_Inc_Input = {
   ips_by_delivery?: InputMaybe<Scalars['Int']['input']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation?: InputMaybe<Scalars['Int']['input']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** input type for inserting data into table "config" */
@@ -30207,6 +31280,8 @@ export type Config_Insert_Input = {
   ips_by_delivery_before_confirmation?: InputMaybe<Scalars['Int']['input']>;
   min_android_version?: InputMaybe<Scalars['String']['input']>;
   min_ios_version?: InputMaybe<Scalars['String']['input']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes?: InputMaybe<Scalars['Int']['input']>;
   /** The id that is used to send the driver warnings to. Is the group that receives the driver warnings. The id comes from whatsapp-web.js */
   whatsapp_warnings_chat_id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -30225,6 +31300,8 @@ export type Config_Max_Fields = {
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
   min_android_version: Maybe<Scalars['String']['output']>;
   min_ios_version: Maybe<Scalars['String']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
   /** The id that is used to send the driver warnings to. Is the group that receives the driver warnings. The id comes from whatsapp-web.js */
   whatsapp_warnings_chat_id: Maybe<Scalars['String']['output']>;
 };
@@ -30243,6 +31320,8 @@ export type Config_Min_Fields = {
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
   min_android_version: Maybe<Scalars['String']['output']>;
   min_ios_version: Maybe<Scalars['String']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
   /** The id that is used to send the driver warnings to. Is the group that receives the driver warnings. The id comes from whatsapp-web.js */
   whatsapp_warnings_chat_id: Maybe<Scalars['String']['output']>;
 };
@@ -30274,6 +31353,7 @@ export type Config_Order_By = {
   ips_by_delivery_before_confirmation?: InputMaybe<Order_By>;
   min_android_version?: InputMaybe<Order_By>;
   min_ios_version?: InputMaybe<Order_By>;
+  receipt_points_window_minutes?: InputMaybe<Order_By>;
   whatsapp_warnings_chat_id?: InputMaybe<Order_By>;
 };
 
@@ -30303,6 +31383,8 @@ export enum Config_Select_Column {
   /** column name */
   MinIosVersion = 'min_ios_version',
   /** column name */
+  ReceiptPointsWindowMinutes = 'receipt_points_window_minutes',
+  /** column name */
   WhatsappWarningsChatId = 'whatsapp_warnings_chat_id'
 }
 
@@ -30318,6 +31400,8 @@ export type Config_Set_Input = {
   ips_by_delivery_before_confirmation?: InputMaybe<Scalars['Int']['input']>;
   min_android_version?: InputMaybe<Scalars['String']['input']>;
   min_ios_version?: InputMaybe<Scalars['String']['input']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes?: InputMaybe<Scalars['Int']['input']>;
   /** The id that is used to send the driver warnings to. Is the group that receives the driver warnings. The id comes from whatsapp-web.js */
   whatsapp_warnings_chat_id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -30330,6 +31414,8 @@ export type Config_Stddev_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -30340,6 +31426,8 @@ export type Config_Stddev_Pop_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -30350,6 +31438,8 @@ export type Config_Stddev_Samp_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** Streaming cursor of the table "config" */
@@ -30373,6 +31463,8 @@ export type Config_Stream_Cursor_Value_Input = {
   ips_by_delivery_before_confirmation?: InputMaybe<Scalars['Int']['input']>;
   min_android_version?: InputMaybe<Scalars['String']['input']>;
   min_ios_version?: InputMaybe<Scalars['String']['input']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes?: InputMaybe<Scalars['Int']['input']>;
   /** The id that is used to send the driver warnings to. Is the group that receives the driver warnings. The id comes from whatsapp-web.js */
   whatsapp_warnings_chat_id?: InputMaybe<Scalars['String']['input']>;
 };
@@ -30385,6 +31477,8 @@ export type Config_Sum_Fields = {
   ips_by_delivery: Maybe<Scalars['Int']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
 };
 
 /** update columns of table "config" */
@@ -30406,6 +31500,8 @@ export enum Config_Update_Column {
   /** column name */
   MinIosVersion = 'min_ios_version',
   /** column name */
+  ReceiptPointsWindowMinutes = 'receipt_points_window_minutes',
+  /** column name */
   WhatsappWarningsChatId = 'whatsapp_warnings_chat_id'
 }
 
@@ -30426,6 +31522,8 @@ export type Config_Var_Pop_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
@@ -30436,6 +31534,8 @@ export type Config_Var_Samp_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
@@ -30446,6 +31546,8 @@ export type Config_Variance_Fields = {
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   /** The amount that the driver will receive after uploading the receipt, but it can be not confirmed yet */
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  /** Delivery points only if the canhoto is photographed within this many minutes of delivery_detected_at. NULL = no limit. */
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 export type Consume_Whatsapp_Event_Args = {
@@ -34659,6 +35761,7 @@ export type Current_Config = {
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
   min_android_version: Maybe<Scalars['String']['output']>;
   min_ios_version: Maybe<Scalars['String']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
   whatsapp_warnings_chat_id: Maybe<Scalars['String']['output']>;
 };
 
@@ -34698,6 +35801,7 @@ export type Current_Config_Avg_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** Boolean expression to filter rows from the table "current_config". All fields are combined with a logical 'AND'. */
@@ -34714,6 +35818,7 @@ export type Current_Config_Bool_Exp = {
   ips_by_delivery_before_confirmation?: InputMaybe<Int_Comparison_Exp>;
   min_android_version?: InputMaybe<String_Comparison_Exp>;
   min_ios_version?: InputMaybe<String_Comparison_Exp>;
+  receipt_points_window_minutes?: InputMaybe<Int_Comparison_Exp>;
   whatsapp_warnings_chat_id?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -34729,6 +35834,7 @@ export type Current_Config_Max_Fields = {
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
   min_android_version: Maybe<Scalars['String']['output']>;
   min_ios_version: Maybe<Scalars['String']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
   whatsapp_warnings_chat_id: Maybe<Scalars['String']['output']>;
 };
 
@@ -34744,6 +35850,7 @@ export type Current_Config_Min_Fields = {
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
   min_android_version: Maybe<Scalars['String']['output']>;
   min_ios_version: Maybe<Scalars['String']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
   whatsapp_warnings_chat_id: Maybe<Scalars['String']['output']>;
 };
 
@@ -34758,6 +35865,7 @@ export type Current_Config_Order_By = {
   ips_by_delivery_before_confirmation?: InputMaybe<Order_By>;
   min_android_version?: InputMaybe<Order_By>;
   min_ios_version?: InputMaybe<Order_By>;
+  receipt_points_window_minutes?: InputMaybe<Order_By>;
   whatsapp_warnings_chat_id?: InputMaybe<Order_By>;
 };
 
@@ -34782,6 +35890,8 @@ export enum Current_Config_Select_Column {
   /** column name */
   MinIosVersion = 'min_ios_version',
   /** column name */
+  ReceiptPointsWindowMinutes = 'receipt_points_window_minutes',
+  /** column name */
   WhatsappWarningsChatId = 'whatsapp_warnings_chat_id'
 }
 
@@ -34791,6 +35901,7 @@ export type Current_Config_Stddev_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -34799,6 +35910,7 @@ export type Current_Config_Stddev_Pop_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -34807,6 +35919,7 @@ export type Current_Config_Stddev_Samp_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** Streaming cursor of the table "current_config" */
@@ -34828,6 +35941,7 @@ export type Current_Config_Stream_Cursor_Value_Input = {
   ips_by_delivery_before_confirmation?: InputMaybe<Scalars['Int']['input']>;
   min_android_version?: InputMaybe<Scalars['String']['input']>;
   min_ios_version?: InputMaybe<Scalars['String']['input']>;
+  receipt_points_window_minutes?: InputMaybe<Scalars['Int']['input']>;
   whatsapp_warnings_chat_id?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -34837,6 +35951,7 @@ export type Current_Config_Sum_Fields = {
   id: Maybe<Scalars['Int']['output']>;
   ips_by_delivery: Maybe<Scalars['Int']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Int']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Int']['output']>;
 };
 
 /** aggregate var_pop on columns */
@@ -34845,6 +35960,7 @@ export type Current_Config_Var_Pop_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
@@ -34853,6 +35969,7 @@ export type Current_Config_Var_Samp_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
@@ -34861,6 +35978,7 @@ export type Current_Config_Variance_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   ips_by_delivery: Maybe<Scalars['Float']['output']>;
   ips_by_delivery_before_confirmation: Maybe<Scalars['Float']['output']>;
+  receipt_points_window_minutes: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "fleet.current_vehicle_config" */
@@ -35491,12 +36609,16 @@ export type Delivery = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id: Scalars['String']['output'];
   bot_synced_at: Maybe<Scalars['timestamptz']['output']>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at: Maybe<Scalars['timestamptz']['output']>;
   codmoto: Scalars['String']['output'];
   created_at: Scalars['timestamptz']['output'];
   /** Referente ao A1_NOME no Protheus */
   customer_name: Scalars['String']['output'];
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at: Maybe<Scalars['String']['output']>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at: Maybe<Scalars['timestamptz']['output']>;
   denied_at: Maybe<Scalars['timestamptz']['output']>;
   /** Referente ao DT6_DOC no Protheus */
   document_number: Scalars['String']['output'];
@@ -35752,10 +36874,12 @@ export type Delivery_Bool_Exp = {
   approved_by_admin_uuid?: InputMaybe<Uuid_Comparison_Exp>;
   batch_invoice_id?: InputMaybe<String_Comparison_Exp>;
   bot_synced_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  cancelled_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   codmoto?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   customer_name?: InputMaybe<String_Comparison_Exp>;
   delivered_at?: InputMaybe<String_Comparison_Exp>;
+  delivery_detected_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   denied_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   document_number?: InputMaybe<String_Comparison_Exp>;
   invoice_issued_at?: InputMaybe<Date_Comparison_Exp>;
@@ -36030,12 +37154,16 @@ export type Delivery_Insert_Input = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id?: InputMaybe<Scalars['String']['input']>;
   bot_synced_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at?: InputMaybe<Scalars['timestamptz']['input']>;
   codmoto?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   /** Referente ao A1_NOME no Protheus */
   customer_name?: InputMaybe<Scalars['String']['input']>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at?: InputMaybe<Scalars['String']['input']>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at?: InputMaybe<Scalars['timestamptz']['input']>;
   denied_at?: InputMaybe<Scalars['timestamptz']['input']>;
   /** Referente ao DT6_DOC no Protheus */
   document_number?: InputMaybe<Scalars['String']['input']>;
@@ -36104,12 +37232,16 @@ export type Delivery_Max_Fields = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id: Maybe<Scalars['String']['output']>;
   bot_synced_at: Maybe<Scalars['timestamptz']['output']>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at: Maybe<Scalars['timestamptz']['output']>;
   codmoto: Maybe<Scalars['String']['output']>;
   created_at: Maybe<Scalars['timestamptz']['output']>;
   /** Referente ao A1_NOME no Protheus */
   customer_name: Maybe<Scalars['String']['output']>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at: Maybe<Scalars['String']['output']>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at: Maybe<Scalars['timestamptz']['output']>;
   denied_at: Maybe<Scalars['timestamptz']['output']>;
   /** Referente ao DT6_DOC no Protheus */
   document_number: Maybe<Scalars['String']['output']>;
@@ -36171,12 +37303,16 @@ export type Delivery_Max_Order_By = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id?: InputMaybe<Order_By>;
   bot_synced_at?: InputMaybe<Order_By>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at?: InputMaybe<Order_By>;
   codmoto?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   /** Referente ao A1_NOME no Protheus */
   customer_name?: InputMaybe<Order_By>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at?: InputMaybe<Order_By>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at?: InputMaybe<Order_By>;
   denied_at?: InputMaybe<Order_By>;
   /** Referente ao DT6_DOC no Protheus */
   document_number?: InputMaybe<Order_By>;
@@ -36239,12 +37375,16 @@ export type Delivery_Min_Fields = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id: Maybe<Scalars['String']['output']>;
   bot_synced_at: Maybe<Scalars['timestamptz']['output']>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at: Maybe<Scalars['timestamptz']['output']>;
   codmoto: Maybe<Scalars['String']['output']>;
   created_at: Maybe<Scalars['timestamptz']['output']>;
   /** Referente ao A1_NOME no Protheus */
   customer_name: Maybe<Scalars['String']['output']>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at: Maybe<Scalars['String']['output']>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at: Maybe<Scalars['timestamptz']['output']>;
   denied_at: Maybe<Scalars['timestamptz']['output']>;
   /** Referente ao DT6_DOC no Protheus */
   document_number: Maybe<Scalars['String']['output']>;
@@ -36306,12 +37446,16 @@ export type Delivery_Min_Order_By = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id?: InputMaybe<Order_By>;
   bot_synced_at?: InputMaybe<Order_By>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at?: InputMaybe<Order_By>;
   codmoto?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   /** Referente ao A1_NOME no Protheus */
   customer_name?: InputMaybe<Order_By>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at?: InputMaybe<Order_By>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at?: InputMaybe<Order_By>;
   denied_at?: InputMaybe<Order_By>;
   /** Referente ao DT6_DOC no Protheus */
   document_number?: InputMaybe<Order_By>;
@@ -36389,10 +37533,12 @@ export type Delivery_Order_By = {
   approved_by_admin_uuid?: InputMaybe<Order_By>;
   batch_invoice_id?: InputMaybe<Order_By>;
   bot_synced_at?: InputMaybe<Order_By>;
+  cancelled_at?: InputMaybe<Order_By>;
   codmoto?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   customer_name?: InputMaybe<Order_By>;
   delivered_at?: InputMaybe<Order_By>;
+  delivery_detected_at?: InputMaybe<Order_By>;
   denied_at?: InputMaybe<Order_By>;
   document_number?: InputMaybe<Order_By>;
   invoice_issued_at?: InputMaybe<Order_By>;
@@ -36458,6 +37604,8 @@ export enum Delivery_Select_Column {
   /** column name */
   BotSyncedAt = 'bot_synced_at',
   /** column name */
+  CancelledAt = 'cancelled_at',
+  /** column name */
   Codmoto = 'codmoto',
   /** column name */
   CreatedAt = 'created_at',
@@ -36465,6 +37613,8 @@ export enum Delivery_Select_Column {
   CustomerName = 'customer_name',
   /** column name */
   DeliveredAt = 'delivered_at',
+  /** column name */
+  DeliveryDetectedAt = 'delivery_detected_at',
   /** column name */
   DeniedAt = 'denied_at',
   /** column name */
@@ -36622,12 +37772,16 @@ export type Delivery_Set_Input = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id?: InputMaybe<Scalars['String']['input']>;
   bot_synced_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at?: InputMaybe<Scalars['timestamptz']['input']>;
   codmoto?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   /** Referente ao A1_NOME no Protheus */
   customer_name?: InputMaybe<Scalars['String']['input']>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at?: InputMaybe<Scalars['String']['input']>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at?: InputMaybe<Scalars['timestamptz']['input']>;
   denied_at?: InputMaybe<Scalars['timestamptz']['input']>;
   /** Referente ao DT6_DOC no Protheus */
   document_number?: InputMaybe<Scalars['String']['input']>;
@@ -36788,12 +37942,16 @@ export type Delivery_Stream_Cursor_Value_Input = {
   /** Referente ao campo DT6_LOTNFC no Protheus */
   batch_invoice_id?: InputMaybe<Scalars['String']['input']>;
   bot_synced_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  /** When driving-report found this document + NF no longer live in Protheus (cancelled or substituted CT-e). NULL = live. */
+  cancelled_at?: InputMaybe<Scalars['timestamptz']['input']>;
   codmoto?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   /** Referente ao A1_NOME no Protheus */
   customer_name?: InputMaybe<Scalars['String']['input']>;
   /** Referente aos campos DUA_DATOCO e DUA_HOROCO no Protheus */
   delivered_at?: InputMaybe<Scalars['String']['input']>;
+  /** When the sync first wrote marked_as_delivered_at (true UTC): from then on the driver can send the canhoto. NULL for deliveries marked before 2026-11-26. */
+  delivery_detected_at?: InputMaybe<Scalars['timestamptz']['input']>;
   denied_at?: InputMaybe<Scalars['timestamptz']['input']>;
   /** Referente ao DT6_DOC no Protheus */
   document_number?: InputMaybe<Scalars['String']['input']>;
@@ -36893,6 +38051,8 @@ export enum Delivery_Update_Column {
   /** column name */
   BotSyncedAt = 'bot_synced_at',
   /** column name */
+  CancelledAt = 'cancelled_at',
+  /** column name */
   Codmoto = 'codmoto',
   /** column name */
   CreatedAt = 'created_at',
@@ -36900,6 +38060,8 @@ export enum Delivery_Update_Column {
   CustomerName = 'customer_name',
   /** column name */
   DeliveredAt = 'delivered_at',
+  /** column name */
+  DeliveryDetectedAt = 'delivery_detected_at',
   /** column name */
   DeniedAt = 'denied_at',
   /** column name */
@@ -37235,6 +38397,687 @@ export enum Driver_Constraint {
   /** unique or primary key constraint on columns "uuid" */
   DriverPkey = 'driver_pkey'
 }
+
+/** Driver app (3.0.16+) source for deliveries: every row of the driver, delivered or not, with marked_as_delivered_at and cancelled_at. Old apps read public.delivery. */
+export type Driver_Delivery = {
+  __typename?: 'driver_delivery';
+  approved_at: Maybe<Scalars['timestamptz']['output']>;
+  approved_by_admin_uuid: Maybe<Scalars['uuid']['output']>;
+  batch_invoice_id: Maybe<Scalars['String']['output']>;
+  cancelled_at: Maybe<Scalars['timestamptz']['output']>;
+  codmoto: Maybe<Scalars['String']['output']>;
+  created_at: Maybe<Scalars['timestamptz']['output']>;
+  customer_name: Maybe<Scalars['String']['output']>;
+  delivered_at: Maybe<Scalars['String']['output']>;
+  delivery_detected_at: Maybe<Scalars['timestamptz']['output']>;
+  denied_at: Maybe<Scalars['timestamptz']['output']>;
+  document_number: Maybe<Scalars['String']['output']>;
+  invoice_issued_at: Maybe<Scalars['date']['output']>;
+  invoice_number: Maybe<Scalars['String']['output']>;
+  is_weight_receipt: Maybe<Scalars['Boolean']['output']>;
+  license_plate: Maybe<Scalars['String']['output']>;
+  license_plate2: Maybe<Scalars['String']['output']>;
+  license_plate3: Maybe<Scalars['String']['output']>;
+  marked_as_delivered_at: Maybe<Scalars['timestamptz']['output']>;
+  mdfe_number: Maybe<Scalars['String']['output']>;
+  receipt_image_url: Maybe<Scalars['String']['output']>;
+  receipt_invoice_image_url: Maybe<Scalars['String']['output']>;
+  receipt_recognized_at: Maybe<Scalars['timestamptz']['output']>;
+  receipt_recognized_invoice_number: Maybe<Scalars['String']['output']>;
+  receipt_uploaded_at: Maybe<Scalars['timestamptz']['output']>;
+  recognized_brm: Maybe<Scalars['String']['output']>;
+  recognized_by_admin_uuid: Maybe<Scalars['uuid']['output']>;
+  recognized_first_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_first_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_first_mp: Maybe<Scalars['String']['output']>;
+  recognized_first_weight: Maybe<Scalars['Int']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Int']['output']>;
+  recognized_license_plate: Maybe<Scalars['String']['output']>;
+  recognized_net_weight: Maybe<Scalars['Int']['output']>;
+  recognized_second_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_second_mp: Maybe<Scalars['String']['output']>;
+  recognized_second_weight: Maybe<Scalars['Int']['output']>;
+  recognized_third_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_third_mp: Maybe<Scalars['String']['output']>;
+  recognized_third_weight: Maybe<Scalars['Int']['output']>;
+  recognized_weighing_at: Maybe<Scalars['timestamptz']['output']>;
+  trip_id: Maybe<Scalars['String']['output']>;
+  updated_at: Maybe<Scalars['timestamptz']['output']>;
+  uuid: Maybe<Scalars['uuid']['output']>;
+  weight: Maybe<Scalars['float8']['output']>;
+};
+
+/** aggregated selection of "driver_delivery" */
+export type Driver_Delivery_Aggregate = {
+  __typename?: 'driver_delivery_aggregate';
+  aggregate: Maybe<Driver_Delivery_Aggregate_Fields>;
+  nodes: Array<Driver_Delivery>;
+};
+
+/** aggregate fields of "driver_delivery" */
+export type Driver_Delivery_Aggregate_Fields = {
+  __typename?: 'driver_delivery_aggregate_fields';
+  avg: Maybe<Driver_Delivery_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max: Maybe<Driver_Delivery_Max_Fields>;
+  min: Maybe<Driver_Delivery_Min_Fields>;
+  stddev: Maybe<Driver_Delivery_Stddev_Fields>;
+  stddev_pop: Maybe<Driver_Delivery_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<Driver_Delivery_Stddev_Samp_Fields>;
+  sum: Maybe<Driver_Delivery_Sum_Fields>;
+  var_pop: Maybe<Driver_Delivery_Var_Pop_Fields>;
+  var_samp: Maybe<Driver_Delivery_Var_Samp_Fields>;
+  variance: Maybe<Driver_Delivery_Variance_Fields>;
+};
+
+
+/** aggregate fields of "driver_delivery" */
+export type Driver_Delivery_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Driver_Delivery_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Driver_Delivery_Avg_Fields = {
+  __typename?: 'driver_delivery_avg_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "driver_delivery". All fields are combined with a logical 'AND'. */
+export type Driver_Delivery_Bool_Exp = {
+  _and?: InputMaybe<Array<Driver_Delivery_Bool_Exp>>;
+  _not?: InputMaybe<Driver_Delivery_Bool_Exp>;
+  _or?: InputMaybe<Array<Driver_Delivery_Bool_Exp>>;
+  approved_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  approved_by_admin_uuid?: InputMaybe<Uuid_Comparison_Exp>;
+  batch_invoice_id?: InputMaybe<String_Comparison_Exp>;
+  cancelled_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  codmoto?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  customer_name?: InputMaybe<String_Comparison_Exp>;
+  delivered_at?: InputMaybe<String_Comparison_Exp>;
+  delivery_detected_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  denied_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  document_number?: InputMaybe<String_Comparison_Exp>;
+  invoice_issued_at?: InputMaybe<Date_Comparison_Exp>;
+  invoice_number?: InputMaybe<String_Comparison_Exp>;
+  is_weight_receipt?: InputMaybe<Boolean_Comparison_Exp>;
+  license_plate?: InputMaybe<String_Comparison_Exp>;
+  license_plate2?: InputMaybe<String_Comparison_Exp>;
+  license_plate3?: InputMaybe<String_Comparison_Exp>;
+  marked_as_delivered_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  mdfe_number?: InputMaybe<String_Comparison_Exp>;
+  receipt_image_url?: InputMaybe<String_Comparison_Exp>;
+  receipt_invoice_image_url?: InputMaybe<String_Comparison_Exp>;
+  receipt_recognized_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  receipt_recognized_invoice_number?: InputMaybe<String_Comparison_Exp>;
+  receipt_uploaded_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  recognized_brm?: InputMaybe<String_Comparison_Exp>;
+  recognized_by_admin_uuid?: InputMaybe<Uuid_Comparison_Exp>;
+  recognized_first_datetime?: InputMaybe<Timestamptz_Comparison_Exp>;
+  recognized_first_ipz?: InputMaybe<Int_Comparison_Exp>;
+  recognized_first_mp?: InputMaybe<String_Comparison_Exp>;
+  recognized_first_weight?: InputMaybe<Int_Comparison_Exp>;
+  recognized_gross_weight?: InputMaybe<Int_Comparison_Exp>;
+  recognized_license_plate?: InputMaybe<String_Comparison_Exp>;
+  recognized_net_weight?: InputMaybe<Int_Comparison_Exp>;
+  recognized_second_datetime?: InputMaybe<Timestamptz_Comparison_Exp>;
+  recognized_second_ipz?: InputMaybe<Int_Comparison_Exp>;
+  recognized_second_mp?: InputMaybe<String_Comparison_Exp>;
+  recognized_second_weight?: InputMaybe<Int_Comparison_Exp>;
+  recognized_third_datetime?: InputMaybe<Timestamptz_Comparison_Exp>;
+  recognized_third_ipz?: InputMaybe<Int_Comparison_Exp>;
+  recognized_third_mp?: InputMaybe<String_Comparison_Exp>;
+  recognized_third_weight?: InputMaybe<Int_Comparison_Exp>;
+  recognized_weighing_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  trip_id?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  uuid?: InputMaybe<Uuid_Comparison_Exp>;
+  weight?: InputMaybe<Float8_Comparison_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "driver_delivery" */
+export type Driver_Delivery_Inc_Input = {
+  recognized_first_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_first_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_gross_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_net_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_weight?: InputMaybe<Scalars['Int']['input']>;
+  weight?: InputMaybe<Scalars['float8']['input']>;
+};
+
+/** input type for inserting data into table "driver_delivery" */
+export type Driver_Delivery_Insert_Input = {
+  approved_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  approved_by_admin_uuid?: InputMaybe<Scalars['uuid']['input']>;
+  batch_invoice_id?: InputMaybe<Scalars['String']['input']>;
+  cancelled_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  codmoto?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  customer_name?: InputMaybe<Scalars['String']['input']>;
+  delivered_at?: InputMaybe<Scalars['String']['input']>;
+  delivery_detected_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  denied_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  invoice_issued_at?: InputMaybe<Scalars['date']['input']>;
+  invoice_number?: InputMaybe<Scalars['String']['input']>;
+  is_weight_receipt?: InputMaybe<Scalars['Boolean']['input']>;
+  license_plate?: InputMaybe<Scalars['String']['input']>;
+  license_plate2?: InputMaybe<Scalars['String']['input']>;
+  license_plate3?: InputMaybe<Scalars['String']['input']>;
+  marked_as_delivered_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  mdfe_number?: InputMaybe<Scalars['String']['input']>;
+  receipt_image_url?: InputMaybe<Scalars['String']['input']>;
+  receipt_invoice_image_url?: InputMaybe<Scalars['String']['input']>;
+  receipt_recognized_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  receipt_recognized_invoice_number?: InputMaybe<Scalars['String']['input']>;
+  receipt_uploaded_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_brm?: InputMaybe<Scalars['String']['input']>;
+  recognized_by_admin_uuid?: InputMaybe<Scalars['uuid']['input']>;
+  recognized_first_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_first_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_first_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_first_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_gross_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_license_plate?: InputMaybe<Scalars['String']['input']>;
+  recognized_net_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_second_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_second_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_third_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_third_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_weighing_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  trip_id?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  uuid?: InputMaybe<Scalars['uuid']['input']>;
+  weight?: InputMaybe<Scalars['float8']['input']>;
+};
+
+/** aggregate max on columns */
+export type Driver_Delivery_Max_Fields = {
+  __typename?: 'driver_delivery_max_fields';
+  approved_at: Maybe<Scalars['timestamptz']['output']>;
+  approved_by_admin_uuid: Maybe<Scalars['uuid']['output']>;
+  batch_invoice_id: Maybe<Scalars['String']['output']>;
+  cancelled_at: Maybe<Scalars['timestamptz']['output']>;
+  codmoto: Maybe<Scalars['String']['output']>;
+  created_at: Maybe<Scalars['timestamptz']['output']>;
+  customer_name: Maybe<Scalars['String']['output']>;
+  delivered_at: Maybe<Scalars['String']['output']>;
+  delivery_detected_at: Maybe<Scalars['timestamptz']['output']>;
+  denied_at: Maybe<Scalars['timestamptz']['output']>;
+  document_number: Maybe<Scalars['String']['output']>;
+  invoice_issued_at: Maybe<Scalars['date']['output']>;
+  invoice_number: Maybe<Scalars['String']['output']>;
+  license_plate: Maybe<Scalars['String']['output']>;
+  license_plate2: Maybe<Scalars['String']['output']>;
+  license_plate3: Maybe<Scalars['String']['output']>;
+  marked_as_delivered_at: Maybe<Scalars['timestamptz']['output']>;
+  mdfe_number: Maybe<Scalars['String']['output']>;
+  receipt_image_url: Maybe<Scalars['String']['output']>;
+  receipt_invoice_image_url: Maybe<Scalars['String']['output']>;
+  receipt_recognized_at: Maybe<Scalars['timestamptz']['output']>;
+  receipt_recognized_invoice_number: Maybe<Scalars['String']['output']>;
+  receipt_uploaded_at: Maybe<Scalars['timestamptz']['output']>;
+  recognized_brm: Maybe<Scalars['String']['output']>;
+  recognized_by_admin_uuid: Maybe<Scalars['uuid']['output']>;
+  recognized_first_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_first_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_first_mp: Maybe<Scalars['String']['output']>;
+  recognized_first_weight: Maybe<Scalars['Int']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Int']['output']>;
+  recognized_license_plate: Maybe<Scalars['String']['output']>;
+  recognized_net_weight: Maybe<Scalars['Int']['output']>;
+  recognized_second_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_second_mp: Maybe<Scalars['String']['output']>;
+  recognized_second_weight: Maybe<Scalars['Int']['output']>;
+  recognized_third_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_third_mp: Maybe<Scalars['String']['output']>;
+  recognized_third_weight: Maybe<Scalars['Int']['output']>;
+  recognized_weighing_at: Maybe<Scalars['timestamptz']['output']>;
+  trip_id: Maybe<Scalars['String']['output']>;
+  updated_at: Maybe<Scalars['timestamptz']['output']>;
+  uuid: Maybe<Scalars['uuid']['output']>;
+  weight: Maybe<Scalars['float8']['output']>;
+};
+
+/** aggregate min on columns */
+export type Driver_Delivery_Min_Fields = {
+  __typename?: 'driver_delivery_min_fields';
+  approved_at: Maybe<Scalars['timestamptz']['output']>;
+  approved_by_admin_uuid: Maybe<Scalars['uuid']['output']>;
+  batch_invoice_id: Maybe<Scalars['String']['output']>;
+  cancelled_at: Maybe<Scalars['timestamptz']['output']>;
+  codmoto: Maybe<Scalars['String']['output']>;
+  created_at: Maybe<Scalars['timestamptz']['output']>;
+  customer_name: Maybe<Scalars['String']['output']>;
+  delivered_at: Maybe<Scalars['String']['output']>;
+  delivery_detected_at: Maybe<Scalars['timestamptz']['output']>;
+  denied_at: Maybe<Scalars['timestamptz']['output']>;
+  document_number: Maybe<Scalars['String']['output']>;
+  invoice_issued_at: Maybe<Scalars['date']['output']>;
+  invoice_number: Maybe<Scalars['String']['output']>;
+  license_plate: Maybe<Scalars['String']['output']>;
+  license_plate2: Maybe<Scalars['String']['output']>;
+  license_plate3: Maybe<Scalars['String']['output']>;
+  marked_as_delivered_at: Maybe<Scalars['timestamptz']['output']>;
+  mdfe_number: Maybe<Scalars['String']['output']>;
+  receipt_image_url: Maybe<Scalars['String']['output']>;
+  receipt_invoice_image_url: Maybe<Scalars['String']['output']>;
+  receipt_recognized_at: Maybe<Scalars['timestamptz']['output']>;
+  receipt_recognized_invoice_number: Maybe<Scalars['String']['output']>;
+  receipt_uploaded_at: Maybe<Scalars['timestamptz']['output']>;
+  recognized_brm: Maybe<Scalars['String']['output']>;
+  recognized_by_admin_uuid: Maybe<Scalars['uuid']['output']>;
+  recognized_first_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_first_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_first_mp: Maybe<Scalars['String']['output']>;
+  recognized_first_weight: Maybe<Scalars['Int']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Int']['output']>;
+  recognized_license_plate: Maybe<Scalars['String']['output']>;
+  recognized_net_weight: Maybe<Scalars['Int']['output']>;
+  recognized_second_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_second_mp: Maybe<Scalars['String']['output']>;
+  recognized_second_weight: Maybe<Scalars['Int']['output']>;
+  recognized_third_datetime: Maybe<Scalars['timestamptz']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_third_mp: Maybe<Scalars['String']['output']>;
+  recognized_third_weight: Maybe<Scalars['Int']['output']>;
+  recognized_weighing_at: Maybe<Scalars['timestamptz']['output']>;
+  trip_id: Maybe<Scalars['String']['output']>;
+  updated_at: Maybe<Scalars['timestamptz']['output']>;
+  uuid: Maybe<Scalars['uuid']['output']>;
+  weight: Maybe<Scalars['float8']['output']>;
+};
+
+/** response of any mutation on the table "driver_delivery" */
+export type Driver_Delivery_Mutation_Response = {
+  __typename?: 'driver_delivery_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Driver_Delivery>;
+};
+
+/** Ordering options when selecting data from "driver_delivery". */
+export type Driver_Delivery_Order_By = {
+  approved_at?: InputMaybe<Order_By>;
+  approved_by_admin_uuid?: InputMaybe<Order_By>;
+  batch_invoice_id?: InputMaybe<Order_By>;
+  cancelled_at?: InputMaybe<Order_By>;
+  codmoto?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  customer_name?: InputMaybe<Order_By>;
+  delivered_at?: InputMaybe<Order_By>;
+  delivery_detected_at?: InputMaybe<Order_By>;
+  denied_at?: InputMaybe<Order_By>;
+  document_number?: InputMaybe<Order_By>;
+  invoice_issued_at?: InputMaybe<Order_By>;
+  invoice_number?: InputMaybe<Order_By>;
+  is_weight_receipt?: InputMaybe<Order_By>;
+  license_plate?: InputMaybe<Order_By>;
+  license_plate2?: InputMaybe<Order_By>;
+  license_plate3?: InputMaybe<Order_By>;
+  marked_as_delivered_at?: InputMaybe<Order_By>;
+  mdfe_number?: InputMaybe<Order_By>;
+  receipt_image_url?: InputMaybe<Order_By>;
+  receipt_invoice_image_url?: InputMaybe<Order_By>;
+  receipt_recognized_at?: InputMaybe<Order_By>;
+  receipt_recognized_invoice_number?: InputMaybe<Order_By>;
+  receipt_uploaded_at?: InputMaybe<Order_By>;
+  recognized_brm?: InputMaybe<Order_By>;
+  recognized_by_admin_uuid?: InputMaybe<Order_By>;
+  recognized_first_datetime?: InputMaybe<Order_By>;
+  recognized_first_ipz?: InputMaybe<Order_By>;
+  recognized_first_mp?: InputMaybe<Order_By>;
+  recognized_first_weight?: InputMaybe<Order_By>;
+  recognized_gross_weight?: InputMaybe<Order_By>;
+  recognized_license_plate?: InputMaybe<Order_By>;
+  recognized_net_weight?: InputMaybe<Order_By>;
+  recognized_second_datetime?: InputMaybe<Order_By>;
+  recognized_second_ipz?: InputMaybe<Order_By>;
+  recognized_second_mp?: InputMaybe<Order_By>;
+  recognized_second_weight?: InputMaybe<Order_By>;
+  recognized_third_datetime?: InputMaybe<Order_By>;
+  recognized_third_ipz?: InputMaybe<Order_By>;
+  recognized_third_mp?: InputMaybe<Order_By>;
+  recognized_third_weight?: InputMaybe<Order_By>;
+  recognized_weighing_at?: InputMaybe<Order_By>;
+  trip_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  uuid?: InputMaybe<Order_By>;
+  weight?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "driver_delivery" */
+export enum Driver_Delivery_Select_Column {
+  /** column name */
+  ApprovedAt = 'approved_at',
+  /** column name */
+  ApprovedByAdminUuid = 'approved_by_admin_uuid',
+  /** column name */
+  BatchInvoiceId = 'batch_invoice_id',
+  /** column name */
+  CancelledAt = 'cancelled_at',
+  /** column name */
+  Codmoto = 'codmoto',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CustomerName = 'customer_name',
+  /** column name */
+  DeliveredAt = 'delivered_at',
+  /** column name */
+  DeliveryDetectedAt = 'delivery_detected_at',
+  /** column name */
+  DeniedAt = 'denied_at',
+  /** column name */
+  DocumentNumber = 'document_number',
+  /** column name */
+  InvoiceIssuedAt = 'invoice_issued_at',
+  /** column name */
+  InvoiceNumber = 'invoice_number',
+  /** column name */
+  IsWeightReceipt = 'is_weight_receipt',
+  /** column name */
+  LicensePlate = 'license_plate',
+  /** column name */
+  LicensePlate2 = 'license_plate2',
+  /** column name */
+  LicensePlate3 = 'license_plate3',
+  /** column name */
+  MarkedAsDeliveredAt = 'marked_as_delivered_at',
+  /** column name */
+  MdfeNumber = 'mdfe_number',
+  /** column name */
+  ReceiptImageUrl = 'receipt_image_url',
+  /** column name */
+  ReceiptInvoiceImageUrl = 'receipt_invoice_image_url',
+  /** column name */
+  ReceiptRecognizedAt = 'receipt_recognized_at',
+  /** column name */
+  ReceiptRecognizedInvoiceNumber = 'receipt_recognized_invoice_number',
+  /** column name */
+  ReceiptUploadedAt = 'receipt_uploaded_at',
+  /** column name */
+  RecognizedBrm = 'recognized_brm',
+  /** column name */
+  RecognizedByAdminUuid = 'recognized_by_admin_uuid',
+  /** column name */
+  RecognizedFirstDatetime = 'recognized_first_datetime',
+  /** column name */
+  RecognizedFirstIpz = 'recognized_first_ipz',
+  /** column name */
+  RecognizedFirstMp = 'recognized_first_mp',
+  /** column name */
+  RecognizedFirstWeight = 'recognized_first_weight',
+  /** column name */
+  RecognizedGrossWeight = 'recognized_gross_weight',
+  /** column name */
+  RecognizedLicensePlate = 'recognized_license_plate',
+  /** column name */
+  RecognizedNetWeight = 'recognized_net_weight',
+  /** column name */
+  RecognizedSecondDatetime = 'recognized_second_datetime',
+  /** column name */
+  RecognizedSecondIpz = 'recognized_second_ipz',
+  /** column name */
+  RecognizedSecondMp = 'recognized_second_mp',
+  /** column name */
+  RecognizedSecondWeight = 'recognized_second_weight',
+  /** column name */
+  RecognizedThirdDatetime = 'recognized_third_datetime',
+  /** column name */
+  RecognizedThirdIpz = 'recognized_third_ipz',
+  /** column name */
+  RecognizedThirdMp = 'recognized_third_mp',
+  /** column name */
+  RecognizedThirdWeight = 'recognized_third_weight',
+  /** column name */
+  RecognizedWeighingAt = 'recognized_weighing_at',
+  /** column name */
+  TripId = 'trip_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Uuid = 'uuid',
+  /** column name */
+  Weight = 'weight'
+}
+
+/** input type for updating data in table "driver_delivery" */
+export type Driver_Delivery_Set_Input = {
+  approved_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  approved_by_admin_uuid?: InputMaybe<Scalars['uuid']['input']>;
+  batch_invoice_id?: InputMaybe<Scalars['String']['input']>;
+  cancelled_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  codmoto?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  customer_name?: InputMaybe<Scalars['String']['input']>;
+  delivered_at?: InputMaybe<Scalars['String']['input']>;
+  delivery_detected_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  denied_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  invoice_issued_at?: InputMaybe<Scalars['date']['input']>;
+  invoice_number?: InputMaybe<Scalars['String']['input']>;
+  is_weight_receipt?: InputMaybe<Scalars['Boolean']['input']>;
+  license_plate?: InputMaybe<Scalars['String']['input']>;
+  license_plate2?: InputMaybe<Scalars['String']['input']>;
+  license_plate3?: InputMaybe<Scalars['String']['input']>;
+  marked_as_delivered_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  mdfe_number?: InputMaybe<Scalars['String']['input']>;
+  receipt_image_url?: InputMaybe<Scalars['String']['input']>;
+  receipt_invoice_image_url?: InputMaybe<Scalars['String']['input']>;
+  receipt_recognized_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  receipt_recognized_invoice_number?: InputMaybe<Scalars['String']['input']>;
+  receipt_uploaded_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_brm?: InputMaybe<Scalars['String']['input']>;
+  recognized_by_admin_uuid?: InputMaybe<Scalars['uuid']['input']>;
+  recognized_first_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_first_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_first_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_first_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_gross_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_license_plate?: InputMaybe<Scalars['String']['input']>;
+  recognized_net_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_second_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_second_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_third_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_third_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_weighing_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  trip_id?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  uuid?: InputMaybe<Scalars['uuid']['input']>;
+  weight?: InputMaybe<Scalars['float8']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Driver_Delivery_Stddev_Fields = {
+  __typename?: 'driver_delivery_stddev_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Driver_Delivery_Stddev_Pop_Fields = {
+  __typename?: 'driver_delivery_stddev_pop_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Driver_Delivery_Stddev_Samp_Fields = {
+  __typename?: 'driver_delivery_stddev_samp_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "driver_delivery" */
+export type Driver_Delivery_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Driver_Delivery_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Driver_Delivery_Stream_Cursor_Value_Input = {
+  approved_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  approved_by_admin_uuid?: InputMaybe<Scalars['uuid']['input']>;
+  batch_invoice_id?: InputMaybe<Scalars['String']['input']>;
+  cancelled_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  codmoto?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  customer_name?: InputMaybe<Scalars['String']['input']>;
+  delivered_at?: InputMaybe<Scalars['String']['input']>;
+  delivery_detected_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  denied_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  document_number?: InputMaybe<Scalars['String']['input']>;
+  invoice_issued_at?: InputMaybe<Scalars['date']['input']>;
+  invoice_number?: InputMaybe<Scalars['String']['input']>;
+  is_weight_receipt?: InputMaybe<Scalars['Boolean']['input']>;
+  license_plate?: InputMaybe<Scalars['String']['input']>;
+  license_plate2?: InputMaybe<Scalars['String']['input']>;
+  license_plate3?: InputMaybe<Scalars['String']['input']>;
+  marked_as_delivered_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  mdfe_number?: InputMaybe<Scalars['String']['input']>;
+  receipt_image_url?: InputMaybe<Scalars['String']['input']>;
+  receipt_invoice_image_url?: InputMaybe<Scalars['String']['input']>;
+  receipt_recognized_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  receipt_recognized_invoice_number?: InputMaybe<Scalars['String']['input']>;
+  receipt_uploaded_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_brm?: InputMaybe<Scalars['String']['input']>;
+  recognized_by_admin_uuid?: InputMaybe<Scalars['uuid']['input']>;
+  recognized_first_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_first_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_first_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_first_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_gross_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_license_plate?: InputMaybe<Scalars['String']['input']>;
+  recognized_net_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_second_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_second_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_second_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_datetime?: InputMaybe<Scalars['timestamptz']['input']>;
+  recognized_third_ipz?: InputMaybe<Scalars['Int']['input']>;
+  recognized_third_mp?: InputMaybe<Scalars['String']['input']>;
+  recognized_third_weight?: InputMaybe<Scalars['Int']['input']>;
+  recognized_weighing_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  trip_id?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  uuid?: InputMaybe<Scalars['uuid']['input']>;
+  weight?: InputMaybe<Scalars['float8']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Driver_Delivery_Sum_Fields = {
+  __typename?: 'driver_delivery_sum_fields';
+  recognized_first_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_first_weight: Maybe<Scalars['Int']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Int']['output']>;
+  recognized_net_weight: Maybe<Scalars['Int']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_second_weight: Maybe<Scalars['Int']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Int']['output']>;
+  recognized_third_weight: Maybe<Scalars['Int']['output']>;
+  weight: Maybe<Scalars['float8']['output']>;
+};
+
+export type Driver_Delivery_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Driver_Delivery_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Driver_Delivery_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Driver_Delivery_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Driver_Delivery_Var_Pop_Fields = {
+  __typename?: 'driver_delivery_var_pop_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Driver_Delivery_Var_Samp_Fields = {
+  __typename?: 'driver_delivery_var_samp_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Driver_Delivery_Variance_Fields = {
+  __typename?: 'driver_delivery_variance_fields';
+  recognized_first_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_first_weight: Maybe<Scalars['Float']['output']>;
+  recognized_gross_weight: Maybe<Scalars['Float']['output']>;
+  recognized_net_weight: Maybe<Scalars['Float']['output']>;
+  recognized_second_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_second_weight: Maybe<Scalars['Float']['output']>;
+  recognized_third_ipz: Maybe<Scalars['Float']['output']>;
+  recognized_third_weight: Maybe<Scalars['Float']['output']>;
+  weight: Maybe<Scalars['Float']['output']>;
+};
 
 /** input type for inserting data into table "fleet.driver" */
 export type Driver_Insert_Input = {
@@ -58866,6 +60709,14 @@ export type Mutation_Root = {
   change_driver_password: Maybe<ChangeDriverPasswordOutput>;
   /** execute VOLATILE function "consume_whatsapp_event" which returns "whatsapp_event" */
   consume_whatsapp_event: Maybe<Whatsapp_Event>;
+  /** delete data from the table: "AudioStudioTake" */
+  delete_AudioStudioTake: Maybe<AudioStudioTake_Mutation_Response>;
+  /** delete single row from the table: "AudioStudioTake" */
+  delete_AudioStudioTake_by_pk: Maybe<AudioStudioTake>;
+  /** delete data from the table: "AudioStudioVersion" */
+  delete_AudioStudioVersion: Maybe<AudioStudioVersion_Mutation_Response>;
+  /** delete single row from the table: "AudioStudioVersion" */
+  delete_AudioStudioVersion_by_pk: Maybe<AudioStudioVersion>;
   /** delete data from the table: "CurrentTiresByVehicle" */
   delete_CurrentTiresByVehicle: Maybe<CurrentTiresByVehicle_Mutation_Response>;
   /** delete data from the table: "DADO_LIDO" */
@@ -59188,6 +61039,8 @@ export type Mutation_Root = {
   delete_driver: Maybe<Driver_Mutation_Response>;
   /** delete single row from the table: "fleet.driver" */
   delete_driver_by_pk: Maybe<Driver>;
+  /** delete data from the table: "driver_delivery" */
+  delete_driver_delivery: Maybe<Driver_Delivery_Mutation_Response>;
   /** delete data from the table: "driver_warning" */
   delete_driver_warning: Maybe<Driver_Warning_Mutation_Response>;
   /** delete single row from the table: "driver_warning" */
@@ -59536,10 +61389,18 @@ export type Mutation_Root = {
   delete_trip_client_location: Maybe<Trip_Client_Location_Mutation_Response>;
   /** delete single row from the table: "trip.client_location" */
   delete_trip_client_location_by_pk: Maybe<Trip_Client_Location>;
+  /** delete data from the table: "trip_fuel.arla_liberado" */
+  delete_trip_fuel_arla_liberado: Maybe<Trip_Fuel_Arla_Liberado_Mutation_Response>;
+  /** delete single row from the table: "trip_fuel.arla_liberado" */
+  delete_trip_fuel_arla_liberado_by_pk: Maybe<Trip_Fuel_Arla_Liberado>;
   /** delete data from the table: "trip_fuel.view_excecoes" */
   delete_trip_fuel_view_excecoes: Maybe<Trip_Fuel_View_Excecoes_Mutation_Response>;
   /** delete data from the table: "trip_fuel.view_vinculos" */
   delete_trip_fuel_view_vinculos: Maybe<Trip_Fuel_View_Vinculos_Mutation_Response>;
+  /** delete data from the table: "trip_fuel.vinculo_arla" */
+  delete_trip_fuel_vinculo_arla: Maybe<Trip_Fuel_Vinculo_Arla_Mutation_Response>;
+  /** delete single row from the table: "trip_fuel.vinculo_arla" */
+  delete_trip_fuel_vinculo_arla_by_pk: Maybe<Trip_Fuel_Vinculo_Arla>;
   /** delete data from the table: "trip_fuel.vinculo_liberado" */
   delete_trip_fuel_vinculo_liberado: Maybe<Trip_Fuel_Vinculo_Liberado_Mutation_Response>;
   /** delete single row from the table: "trip_fuel.vinculo_liberado" */
@@ -59652,6 +61513,14 @@ export type Mutation_Root = {
   edi_api_request_end_of_busca_nfe: Maybe<EdiApiNFeOutput>;
   /** execute VOLATILE function "generate_missing_score_processed" which returns "score_processed" */
   generate_missing_score_processed: Array<Score_Processed>;
+  /** insert data into the table: "AudioStudioTake" */
+  insert_AudioStudioTake: Maybe<AudioStudioTake_Mutation_Response>;
+  /** insert a single row into the table: "AudioStudioTake" */
+  insert_AudioStudioTake_one: Maybe<AudioStudioTake>;
+  /** insert data into the table: "AudioStudioVersion" */
+  insert_AudioStudioVersion: Maybe<AudioStudioVersion_Mutation_Response>;
+  /** insert a single row into the table: "AudioStudioVersion" */
+  insert_AudioStudioVersion_one: Maybe<AudioStudioVersion>;
   /** insert data into the table: "CurrentTiresByVehicle" */
   insert_CurrentTiresByVehicle: Maybe<CurrentTiresByVehicle_Mutation_Response>;
   /** insert a single row into the table: "CurrentTiresByVehicle" */
@@ -60002,6 +61871,10 @@ export type Mutation_Root = {
   insert_delivery_one: Maybe<Delivery>;
   /** insert data into the table: "fleet.driver" */
   insert_driver: Maybe<Driver_Mutation_Response>;
+  /** insert data into the table: "driver_delivery" */
+  insert_driver_delivery: Maybe<Driver_Delivery_Mutation_Response>;
+  /** insert a single row into the table: "driver_delivery" */
+  insert_driver_delivery_one: Maybe<Driver_Delivery>;
   /** insert a single row into the table: "fleet.driver" */
   insert_driver_one: Maybe<Driver>;
   /** insert data into the table: "driver_warning" */
@@ -60368,6 +62241,10 @@ export type Mutation_Root = {
   insert_trip_client_location: Maybe<Trip_Client_Location_Mutation_Response>;
   /** insert a single row into the table: "trip.client_location" */
   insert_trip_client_location_one: Maybe<Trip_Client_Location>;
+  /** insert data into the table: "trip_fuel.arla_liberado" */
+  insert_trip_fuel_arla_liberado: Maybe<Trip_Fuel_Arla_Liberado_Mutation_Response>;
+  /** insert a single row into the table: "trip_fuel.arla_liberado" */
+  insert_trip_fuel_arla_liberado_one: Maybe<Trip_Fuel_Arla_Liberado>;
   /** insert data into the table: "trip_fuel.view_excecoes" */
   insert_trip_fuel_view_excecoes: Maybe<Trip_Fuel_View_Excecoes_Mutation_Response>;
   /** insert a single row into the table: "trip_fuel.view_excecoes" */
@@ -60376,6 +62253,10 @@ export type Mutation_Root = {
   insert_trip_fuel_view_vinculos: Maybe<Trip_Fuel_View_Vinculos_Mutation_Response>;
   /** insert a single row into the table: "trip_fuel.view_vinculos" */
   insert_trip_fuel_view_vinculos_one: Maybe<Trip_Fuel_View_Vinculos>;
+  /** insert data into the table: "trip_fuel.vinculo_arla" */
+  insert_trip_fuel_vinculo_arla: Maybe<Trip_Fuel_Vinculo_Arla_Mutation_Response>;
+  /** insert a single row into the table: "trip_fuel.vinculo_arla" */
+  insert_trip_fuel_vinculo_arla_one: Maybe<Trip_Fuel_Vinculo_Arla>;
   /** insert data into the table: "trip_fuel.vinculo_liberado" */
   insert_trip_fuel_vinculo_liberado: Maybe<Trip_Fuel_Vinculo_Liberado_Mutation_Response>;
   /** insert a single row into the table: "trip_fuel.vinculo_liberado" */
@@ -60495,6 +62376,14 @@ export type Mutation_Root = {
   trip_register_manual_occurrence: Array<Trip_Occurrence>;
   /** execute VOLATILE function "trip.fn_retry_occurrence_action" which returns "trip.occurrence_action" */
   trip_retry_occurrence_action: Array<Trip_Occurrence_Action>;
+  /** update data of the table: "AudioStudioTake" */
+  update_AudioStudioTake: Maybe<AudioStudioTake_Mutation_Response>;
+  /** update single row of the table: "AudioStudioTake" */
+  update_AudioStudioTake_by_pk: Maybe<AudioStudioTake>;
+  /** update data of the table: "AudioStudioVersion" */
+  update_AudioStudioVersion: Maybe<AudioStudioVersion_Mutation_Response>;
+  /** update single row of the table: "AudioStudioVersion" */
+  update_AudioStudioVersion_by_pk: Maybe<AudioStudioVersion>;
   /** update data of the table: "CurrentTiresByVehicle" */
   update_CurrentTiresByVehicle: Maybe<CurrentTiresByVehicle_Mutation_Response>;
   /** update data of the table: "DADO_LIDO" */
@@ -60915,6 +62804,10 @@ export type Mutation_Root = {
   update_driver: Maybe<Driver_Mutation_Response>;
   /** update single row of the table: "fleet.driver" */
   update_driver_by_pk: Maybe<Driver>;
+  /** update data of the table: "driver_delivery" */
+  update_driver_delivery: Maybe<Driver_Delivery_Mutation_Response>;
+  /** update multiples rows of table: "driver_delivery" */
+  update_driver_delivery_many: Maybe<Array<Maybe<Driver_Delivery_Mutation_Response>>>;
   /** update multiples rows of table: "fleet.driver" */
   update_driver_many: Maybe<Array<Maybe<Driver_Mutation_Response>>>;
   /** update data of the table: "driver_warning" */
@@ -61449,10 +63342,18 @@ export type Mutation_Root = {
   update_trip_client_location_by_pk: Maybe<Trip_Client_Location>;
   /** update multiples rows of table: "trip.client_location" */
   update_trip_client_location_many: Maybe<Array<Maybe<Trip_Client_Location_Mutation_Response>>>;
+  /** update data of the table: "trip_fuel.arla_liberado" */
+  update_trip_fuel_arla_liberado: Maybe<Trip_Fuel_Arla_Liberado_Mutation_Response>;
+  /** update single row of the table: "trip_fuel.arla_liberado" */
+  update_trip_fuel_arla_liberado_by_pk: Maybe<Trip_Fuel_Arla_Liberado>;
   /** update data of the table: "trip_fuel.view_excecoes" */
   update_trip_fuel_view_excecoes: Maybe<Trip_Fuel_View_Excecoes_Mutation_Response>;
   /** update data of the table: "trip_fuel.view_vinculos" */
   update_trip_fuel_view_vinculos: Maybe<Trip_Fuel_View_Vinculos_Mutation_Response>;
+  /** update data of the table: "trip_fuel.vinculo_arla" */
+  update_trip_fuel_vinculo_arla: Maybe<Trip_Fuel_Vinculo_Arla_Mutation_Response>;
+  /** update single row of the table: "trip_fuel.vinculo_arla" */
+  update_trip_fuel_vinculo_arla_by_pk: Maybe<Trip_Fuel_Vinculo_Arla>;
   /** update data of the table: "trip_fuel.vinculo_liberado" */
   update_trip_fuel_vinculo_liberado: Maybe<Trip_Fuel_Vinculo_Liberado_Mutation_Response>;
   /** update single row of the table: "trip_fuel.vinculo_liberado" */
@@ -61723,6 +63624,30 @@ export type Mutation_RootConsume_Whatsapp_EventArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Whatsapp_Event_Order_By>>;
   where?: InputMaybe<Whatsapp_Event_Bool_Exp>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AudioStudioTakeArgs = {
+  where: AudioStudioTake_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AudioStudioTake_By_PkArgs = {
+  Id: Scalars['uniqueidentifier']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AudioStudioVersionArgs = {
+  where: AudioStudioVersion_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AudioStudioVersion_By_PkArgs = {
+  Id: Scalars['uniqueidentifier']['input'];
 };
 
 
@@ -62702,6 +64627,12 @@ export type Mutation_RootDelete_DriverArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Driver_By_PkArgs = {
   uuid: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Driver_DeliveryArgs = {
+  where: Driver_Delivery_Bool_Exp;
 };
 
 
@@ -63771,6 +65702,18 @@ export type Mutation_RootDelete_Trip_Client_Location_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Trip_Fuel_Arla_LiberadoArgs = {
+  where: Trip_Fuel_Arla_Liberado_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Trip_Fuel_Arla_Liberado_By_PkArgs = {
+  id_abaposto: Scalars['Int']['input'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_Trip_Fuel_View_ExcecoesArgs = {
   where: Trip_Fuel_View_Excecoes_Bool_Exp;
 };
@@ -63779,6 +65722,18 @@ export type Mutation_RootDelete_Trip_Fuel_View_ExcecoesArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Trip_Fuel_View_VinculosArgs = {
   where: Trip_Fuel_View_Vinculos_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Trip_Fuel_Vinculo_ArlaArgs = {
+  where: Trip_Fuel_Vinculo_Arla_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Trip_Fuel_Vinculo_Arla_By_PkArgs = {
+  id_abaposto: Scalars['Int']['input'];
 };
 
 
@@ -64115,6 +66070,34 @@ export type Mutation_RootGenerate_Missing_Score_ProcessedArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Score_Processed_Order_By>>;
   where?: InputMaybe<Score_Processed_Bool_Exp>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_AudioStudioTakeArgs = {
+  if_matched?: InputMaybe<AudioStudioTake_If_Matched>;
+  objects: Array<AudioStudioTake_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_AudioStudioTake_OneArgs = {
+  if_matched?: InputMaybe<AudioStudioTake_If_Matched>;
+  object: AudioStudioTake_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_AudioStudioVersionArgs = {
+  if_matched?: InputMaybe<AudioStudioVersion_If_Matched>;
+  objects: Array<AudioStudioVersion_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_AudioStudioVersion_OneArgs = {
+  if_matched?: InputMaybe<AudioStudioVersion_If_Matched>;
+  object: AudioStudioVersion_Insert_Input;
 };
 
 
@@ -65332,6 +67315,18 @@ export type Mutation_RootInsert_Delivery_OneArgs = {
 export type Mutation_RootInsert_DriverArgs = {
   objects: Array<Driver_Insert_Input>;
   on_conflict?: InputMaybe<Driver_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Driver_DeliveryArgs = {
+  objects: Array<Driver_Delivery_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Driver_Delivery_OneArgs = {
+  object: Driver_Delivery_Insert_Input;
 };
 
 
@@ -66601,6 +68596,20 @@ export type Mutation_RootInsert_Trip_Client_Location_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Trip_Fuel_Arla_LiberadoArgs = {
+  if_matched?: InputMaybe<Trip_Fuel_Arla_Liberado_If_Matched>;
+  objects: Array<Trip_Fuel_Arla_Liberado_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Trip_Fuel_Arla_Liberado_OneArgs = {
+  if_matched?: InputMaybe<Trip_Fuel_Arla_Liberado_If_Matched>;
+  object: Trip_Fuel_Arla_Liberado_Insert_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Trip_Fuel_View_ExcecoesArgs = {
   if_matched?: InputMaybe<Trip_Fuel_View_Excecoes_If_Matched>;
   objects: Array<Trip_Fuel_View_Excecoes_Insert_Input>;
@@ -66625,6 +68634,20 @@ export type Mutation_RootInsert_Trip_Fuel_View_VinculosArgs = {
 export type Mutation_RootInsert_Trip_Fuel_View_Vinculos_OneArgs = {
   if_matched?: InputMaybe<Trip_Fuel_View_Vinculos_If_Matched>;
   object: Trip_Fuel_View_Vinculos_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Trip_Fuel_Vinculo_ArlaArgs = {
+  if_matched?: InputMaybe<Trip_Fuel_Vinculo_Arla_If_Matched>;
+  objects: Array<Trip_Fuel_Vinculo_Arla_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Trip_Fuel_Vinculo_Arla_OneArgs = {
+  if_matched?: InputMaybe<Trip_Fuel_Vinculo_Arla_If_Matched>;
+  object: Trip_Fuel_Vinculo_Arla_Insert_Input;
 };
 
 
@@ -67067,6 +69090,38 @@ export type Mutation_RootTrip_Retry_Occurrence_ActionArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Trip_Occurrence_Action_Order_By>>;
   where?: InputMaybe<Trip_Occurrence_Action_Bool_Exp>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AudioStudioTakeArgs = {
+  _inc?: InputMaybe<AudioStudioTake_Inc_Input>;
+  _set?: InputMaybe<AudioStudioTake_Set_Input>;
+  where: AudioStudioTake_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AudioStudioTake_By_PkArgs = {
+  _inc?: InputMaybe<AudioStudioTake_Inc_Input>;
+  _set?: InputMaybe<AudioStudioTake_Set_Input>;
+  pk_columns: AudioStudioTake_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AudioStudioVersionArgs = {
+  _inc?: InputMaybe<AudioStudioVersion_Inc_Input>;
+  _set?: InputMaybe<AudioStudioVersion_Set_Input>;
+  where: AudioStudioVersion_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AudioStudioVersion_By_PkArgs = {
+  _inc?: InputMaybe<AudioStudioVersion_Inc_Input>;
+  _set?: InputMaybe<AudioStudioVersion_Set_Input>;
+  pk_columns: AudioStudioVersion_Pk_Columns_Input;
 };
 
 
@@ -68750,6 +70805,20 @@ export type Mutation_RootUpdate_DriverArgs = {
 export type Mutation_RootUpdate_Driver_By_PkArgs = {
   _set?: InputMaybe<Driver_Set_Input>;
   pk_columns: Driver_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Driver_DeliveryArgs = {
+  _inc?: InputMaybe<Driver_Delivery_Inc_Input>;
+  _set?: InputMaybe<Driver_Delivery_Set_Input>;
+  where: Driver_Delivery_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Driver_Delivery_ManyArgs = {
+  updates: Array<Driver_Delivery_Updates>;
 };
 
 
@@ -70718,6 +72787,22 @@ export type Mutation_RootUpdate_Trip_Client_Location_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Trip_Fuel_Arla_LiberadoArgs = {
+  _inc?: InputMaybe<Trip_Fuel_Arla_Liberado_Inc_Input>;
+  _set?: InputMaybe<Trip_Fuel_Arla_Liberado_Set_Input>;
+  where: Trip_Fuel_Arla_Liberado_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Trip_Fuel_Arla_Liberado_By_PkArgs = {
+  _inc?: InputMaybe<Trip_Fuel_Arla_Liberado_Inc_Input>;
+  _set?: InputMaybe<Trip_Fuel_Arla_Liberado_Set_Input>;
+  pk_columns: Trip_Fuel_Arla_Liberado_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Trip_Fuel_View_ExcecoesArgs = {
   _inc?: InputMaybe<Trip_Fuel_View_Excecoes_Inc_Input>;
   _set?: InputMaybe<Trip_Fuel_View_Excecoes_Set_Input>;
@@ -70730,6 +72815,22 @@ export type Mutation_RootUpdate_Trip_Fuel_View_VinculosArgs = {
   _inc?: InputMaybe<Trip_Fuel_View_Vinculos_Inc_Input>;
   _set?: InputMaybe<Trip_Fuel_View_Vinculos_Set_Input>;
   where: Trip_Fuel_View_Vinculos_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Trip_Fuel_Vinculo_ArlaArgs = {
+  _inc?: InputMaybe<Trip_Fuel_Vinculo_Arla_Inc_Input>;
+  _set?: InputMaybe<Trip_Fuel_Vinculo_Arla_Set_Input>;
+  where: Trip_Fuel_Vinculo_Arla_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Trip_Fuel_Vinculo_Arla_By_PkArgs = {
+  _inc?: InputMaybe<Trip_Fuel_Vinculo_Arla_Inc_Input>;
+  _set?: InputMaybe<Trip_Fuel_Vinculo_Arla_Set_Input>;
+  pk_columns: Trip_Fuel_Vinculo_Arla_Pk_Columns_Input;
 };
 
 
@@ -77521,6 +79622,18 @@ export type Profile_Updates = {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "AudioStudioTake" */
+  AudioStudioTake: Array<AudioStudioTake>;
+  /** fetch aggregated fields from the table: "AudioStudioTake" */
+  AudioStudioTake_aggregate: AudioStudioTake_Aggregate;
+  /** fetch data from the table: "AudioStudioTake" using primary key columns */
+  AudioStudioTake_by_pk: Maybe<AudioStudioTake>;
+  /** fetch data from the table: "AudioStudioVersion" */
+  AudioStudioVersion: Array<AudioStudioVersion>;
+  /** fetch aggregated fields from the table: "AudioStudioVersion" */
+  AudioStudioVersion_aggregate: AudioStudioVersion_Aggregate;
+  /** fetch data from the table: "AudioStudioVersion" using primary key columns */
+  AudioStudioVersion_by_pk: Maybe<AudioStudioVersion>;
   /** fetch data from the table: "CurrentTiresByVehicle" */
   CurrentTiresByVehicle: Array<CurrentTiresByVehicle>;
   /** fetch aggregated fields from the table: "CurrentTiresByVehicle" */
@@ -78049,6 +80162,10 @@ export type Query_Root = {
   driver_aggregate: Driver_Aggregate;
   /** fetch data from the table: "fleet.driver" using primary key columns */
   driver_by_pk: Maybe<Driver>;
+  /** fetch data from the table: "driver_delivery" */
+  driver_delivery: Array<Driver_Delivery>;
+  /** fetch aggregated fields from the table: "driver_delivery" */
+  driver_delivery_aggregate: Driver_Delivery_Aggregate;
   driver_journeys_v4: DriverJourneysV4Output;
   /** execute function "driver_performance_data" which returns "empty_tables.driver_performance_data" */
   driver_performance_data: Array<Empty_Tables_Driver_Performance_Data>;
@@ -78677,6 +80794,12 @@ export type Query_Root = {
   trip_client_work_area: Array<Trip_Client_Work_Area>;
   /** fetch aggregated fields from the table: "trip.client_work_area" */
   trip_client_work_area_aggregate: Trip_Client_Work_Area_Aggregate;
+  /** fetch data from the table: "trip_fuel.arla_liberado" */
+  trip_fuel_arla_liberado: Array<Trip_Fuel_Arla_Liberado>;
+  /** fetch aggregated fields from the table: "trip_fuel.arla_liberado" */
+  trip_fuel_arla_liberado_aggregate: Trip_Fuel_Arla_Liberado_Aggregate;
+  /** fetch data from the table: "trip_fuel.arla_liberado" using primary key columns */
+  trip_fuel_arla_liberado_by_pk: Maybe<Trip_Fuel_Arla_Liberado>;
   /** fetch data from the table: "trip_fuel.view_excecoes" */
   trip_fuel_view_excecoes: Array<Trip_Fuel_View_Excecoes>;
   /** fetch aggregated fields from the table: "trip_fuel.view_excecoes" */
@@ -78685,6 +80808,12 @@ export type Query_Root = {
   trip_fuel_view_vinculos: Array<Trip_Fuel_View_Vinculos>;
   /** fetch aggregated fields from the table: "trip_fuel.view_vinculos" */
   trip_fuel_view_vinculos_aggregate: Trip_Fuel_View_Vinculos_Aggregate;
+  /** fetch data from the table: "trip_fuel.vinculo_arla" */
+  trip_fuel_vinculo_arla: Array<Trip_Fuel_Vinculo_Arla>;
+  /** fetch aggregated fields from the table: "trip_fuel.vinculo_arla" */
+  trip_fuel_vinculo_arla_aggregate: Trip_Fuel_Vinculo_Arla_Aggregate;
+  /** fetch data from the table: "trip_fuel.vinculo_arla" using primary key columns */
+  trip_fuel_vinculo_arla_by_pk: Maybe<Trip_Fuel_Vinculo_Arla>;
   /** fetch data from the table: "trip_fuel.vinculo_liberado" */
   trip_fuel_vinculo_liberado: Array<Trip_Fuel_Vinculo_Liberado>;
   /** fetch aggregated fields from the table: "trip_fuel.vinculo_liberado" */
@@ -78861,6 +80990,48 @@ export type Query_Root = {
   /** fetch data from the table: "whatsapp_trigger" using primary key columns */
   whatsapp_trigger_by_pk: Maybe<Whatsapp_Trigger>;
   wrong_data_trips: Array<WrongDataTrips>;
+};
+
+
+export type Query_RootAudioStudioTakeArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioTake_Order_By>>;
+  where?: InputMaybe<AudioStudioTake_Bool_Exp>;
+};
+
+
+export type Query_RootAudioStudioTake_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioTake_Order_By>>;
+  where?: InputMaybe<AudioStudioTake_Bool_Exp>;
+};
+
+
+export type Query_RootAudioStudioTake_By_PkArgs = {
+  Id: Scalars['uniqueidentifier']['input'];
+};
+
+
+export type Query_RootAudioStudioVersionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioVersion_Order_By>>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+
+export type Query_RootAudioStudioVersion_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioVersion_Order_By>>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+
+export type Query_RootAudioStudioVersion_By_PkArgs = {
+  Id: Scalars['uniqueidentifier']['input'];
 };
 
 
@@ -80882,6 +83053,24 @@ export type Query_RootDriver_AggregateArgs = {
 
 export type Query_RootDriver_By_PkArgs = {
   uuid: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootDriver_DeliveryArgs = {
+  distinct_on?: InputMaybe<Array<Driver_Delivery_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Driver_Delivery_Order_By>>;
+  where?: InputMaybe<Driver_Delivery_Bool_Exp>;
+};
+
+
+export type Query_RootDriver_Delivery_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Driver_Delivery_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Driver_Delivery_Order_By>>;
+  where?: InputMaybe<Driver_Delivery_Bool_Exp>;
 };
 
 
@@ -83517,6 +85706,27 @@ export type Query_RootTrip_Client_Work_Area_AggregateArgs = {
 };
 
 
+export type Query_RootTrip_Fuel_Arla_LiberadoArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Arla_Liberado_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Arla_Liberado_Bool_Exp>;
+};
+
+
+export type Query_RootTrip_Fuel_Arla_Liberado_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Arla_Liberado_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Arla_Liberado_Bool_Exp>;
+};
+
+
+export type Query_RootTrip_Fuel_Arla_Liberado_By_PkArgs = {
+  id_abaposto: Scalars['Int']['input'];
+};
+
+
 export type Query_RootTrip_Fuel_View_ExcecoesArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -83546,6 +85756,27 @@ export type Query_RootTrip_Fuel_View_Vinculos_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Trip_Fuel_View_Vinculos_Order_By>>;
   where?: InputMaybe<Trip_Fuel_View_Vinculos_Bool_Exp>;
+};
+
+
+export type Query_RootTrip_Fuel_Vinculo_ArlaArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Vinculo_Arla_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Vinculo_Arla_Bool_Exp>;
+};
+
+
+export type Query_RootTrip_Fuel_Vinculo_Arla_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Vinculo_Arla_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Vinculo_Arla_Bool_Exp>;
+};
+
+
+export type Query_RootTrip_Fuel_Vinculo_Arla_By_PkArgs = {
+  id_abaposto: Scalars['Int']['input'];
 };
 
 
@@ -87084,6 +89315,18 @@ export type Status_Truck_Hardware_Variance_Fields = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "AudioStudioTake" */
+  AudioStudioTake: Array<AudioStudioTake>;
+  /** fetch aggregated fields from the table: "AudioStudioTake" */
+  AudioStudioTake_aggregate: AudioStudioTake_Aggregate;
+  /** fetch data from the table: "AudioStudioTake" using primary key columns */
+  AudioStudioTake_by_pk: Maybe<AudioStudioTake>;
+  /** fetch data from the table: "AudioStudioVersion" */
+  AudioStudioVersion: Array<AudioStudioVersion>;
+  /** fetch aggregated fields from the table: "AudioStudioVersion" */
+  AudioStudioVersion_aggregate: AudioStudioVersion_Aggregate;
+  /** fetch data from the table: "AudioStudioVersion" using primary key columns */
+  AudioStudioVersion_by_pk: Maybe<AudioStudioVersion>;
   /** fetch data from the table: "CurrentTiresByVehicle" */
   CurrentTiresByVehicle: Array<CurrentTiresByVehicle>;
   /** fetch aggregated fields from the table: "CurrentTiresByVehicle" */
@@ -87717,6 +89960,12 @@ export type Subscription_Root = {
   driver_aggregate: Driver_Aggregate;
   /** fetch data from the table: "fleet.driver" using primary key columns */
   driver_by_pk: Maybe<Driver>;
+  /** fetch data from the table: "driver_delivery" */
+  driver_delivery: Array<Driver_Delivery>;
+  /** fetch aggregated fields from the table: "driver_delivery" */
+  driver_delivery_aggregate: Driver_Delivery_Aggregate;
+  /** fetch data from the table in a streaming manner: "driver_delivery" */
+  driver_delivery_stream: Array<Driver_Delivery>;
   /** execute function "driver_performance_data" which returns "empty_tables.driver_performance_data" */
   driver_performance_data: Array<Empty_Tables_Driver_Performance_Data>;
   /** execute function "driver_performance_data" and query aggregates on result of table type "empty_tables.driver_performance_data" */
@@ -88526,6 +90775,12 @@ export type Subscription_Root = {
   trip_client_work_area_aggregate: Trip_Client_Work_Area_Aggregate;
   /** fetch data from the table in a streaming manner: "trip.client_work_area" */
   trip_client_work_area_stream: Array<Trip_Client_Work_Area>;
+  /** fetch data from the table: "trip_fuel.arla_liberado" */
+  trip_fuel_arla_liberado: Array<Trip_Fuel_Arla_Liberado>;
+  /** fetch aggregated fields from the table: "trip_fuel.arla_liberado" */
+  trip_fuel_arla_liberado_aggregate: Trip_Fuel_Arla_Liberado_Aggregate;
+  /** fetch data from the table: "trip_fuel.arla_liberado" using primary key columns */
+  trip_fuel_arla_liberado_by_pk: Maybe<Trip_Fuel_Arla_Liberado>;
   /** fetch data from the table: "trip_fuel.view_excecoes" */
   trip_fuel_view_excecoes: Array<Trip_Fuel_View_Excecoes>;
   /** fetch aggregated fields from the table: "trip_fuel.view_excecoes" */
@@ -88534,6 +90789,12 @@ export type Subscription_Root = {
   trip_fuel_view_vinculos: Array<Trip_Fuel_View_Vinculos>;
   /** fetch aggregated fields from the table: "trip_fuel.view_vinculos" */
   trip_fuel_view_vinculos_aggregate: Trip_Fuel_View_Vinculos_Aggregate;
+  /** fetch data from the table: "trip_fuel.vinculo_arla" */
+  trip_fuel_vinculo_arla: Array<Trip_Fuel_Vinculo_Arla>;
+  /** fetch aggregated fields from the table: "trip_fuel.vinculo_arla" */
+  trip_fuel_vinculo_arla_aggregate: Trip_Fuel_Vinculo_Arla_Aggregate;
+  /** fetch data from the table: "trip_fuel.vinculo_arla" using primary key columns */
+  trip_fuel_vinculo_arla_by_pk: Maybe<Trip_Fuel_Vinculo_Arla>;
   /** fetch data from the table: "trip_fuel.vinculo_liberado" */
   trip_fuel_vinculo_liberado: Array<Trip_Fuel_Vinculo_Liberado>;
   /** fetch aggregated fields from the table: "trip_fuel.vinculo_liberado" */
@@ -88767,6 +91028,48 @@ export type Subscription_Root = {
   whatsapp_trigger_by_pk: Maybe<Whatsapp_Trigger>;
   /** fetch data from the table in a streaming manner: "whatsapp_trigger" */
   whatsapp_trigger_stream: Array<Whatsapp_Trigger>;
+};
+
+
+export type Subscription_RootAudioStudioTakeArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioTake_Order_By>>;
+  where?: InputMaybe<AudioStudioTake_Bool_Exp>;
+};
+
+
+export type Subscription_RootAudioStudioTake_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioTake_Order_By>>;
+  where?: InputMaybe<AudioStudioTake_Bool_Exp>;
+};
+
+
+export type Subscription_RootAudioStudioTake_By_PkArgs = {
+  Id: Scalars['uniqueidentifier']['input'];
+};
+
+
+export type Subscription_RootAudioStudioVersionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioVersion_Order_By>>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+
+export type Subscription_RootAudioStudioVersion_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<AudioStudioVersion_Order_By>>;
+  where?: InputMaybe<AudioStudioVersion_Bool_Exp>;
+};
+
+
+export type Subscription_RootAudioStudioVersion_By_PkArgs = {
+  Id: Scalars['uniqueidentifier']['input'];
 };
 
 
@@ -91156,6 +93459,31 @@ export type Subscription_RootDriver_AggregateArgs = {
 
 export type Subscription_RootDriver_By_PkArgs = {
   uuid: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootDriver_DeliveryArgs = {
+  distinct_on?: InputMaybe<Array<Driver_Delivery_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Driver_Delivery_Order_By>>;
+  where?: InputMaybe<Driver_Delivery_Bool_Exp>;
+};
+
+
+export type Subscription_RootDriver_Delivery_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Driver_Delivery_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Driver_Delivery_Order_By>>;
+  where?: InputMaybe<Driver_Delivery_Bool_Exp>;
+};
+
+
+export type Subscription_RootDriver_Delivery_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Driver_Delivery_Stream_Cursor_Input>>;
+  where?: InputMaybe<Driver_Delivery_Bool_Exp>;
 };
 
 
@@ -94402,6 +96730,27 @@ export type Subscription_RootTrip_Client_Work_Area_StreamArgs = {
 };
 
 
+export type Subscription_RootTrip_Fuel_Arla_LiberadoArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Arla_Liberado_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Arla_Liberado_Bool_Exp>;
+};
+
+
+export type Subscription_RootTrip_Fuel_Arla_Liberado_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Arla_Liberado_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Arla_Liberado_Bool_Exp>;
+};
+
+
+export type Subscription_RootTrip_Fuel_Arla_Liberado_By_PkArgs = {
+  id_abaposto: Scalars['Int']['input'];
+};
+
+
 export type Subscription_RootTrip_Fuel_View_ExcecoesArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -94431,6 +96780,27 @@ export type Subscription_RootTrip_Fuel_View_Vinculos_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Trip_Fuel_View_Vinculos_Order_By>>;
   where?: InputMaybe<Trip_Fuel_View_Vinculos_Bool_Exp>;
+};
+
+
+export type Subscription_RootTrip_Fuel_Vinculo_ArlaArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Vinculo_Arla_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Vinculo_Arla_Bool_Exp>;
+};
+
+
+export type Subscription_RootTrip_Fuel_Vinculo_Arla_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Trip_Fuel_Vinculo_Arla_Order_By>>;
+  where?: InputMaybe<Trip_Fuel_Vinculo_Arla_Bool_Exp>;
+};
+
+
+export type Subscription_RootTrip_Fuel_Vinculo_Arla_By_PkArgs = {
+  id_abaposto: Scalars['Int']['input'];
 };
 
 
@@ -104786,6 +107156,260 @@ export type Trip_Fn_Retry_Occurrence_Action_Args = {
   p_uuid?: InputMaybe<Scalars['uuid']['input']>;
 };
 
+/** columns and relationships of "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado = {
+  __typename?: 'trip_fuel_arla_liberado';
+  erro: Maybe<Scalars['String']['output']>;
+  id_abaposto: Scalars['Int']['output'];
+  liberado_em: Scalars['datetime']['output'];
+  plano: Maybe<Scalars['String']['output']>;
+  processado_em: Maybe<Scalars['datetime']['output']>;
+  status: Scalars['String']['output'];
+  user_name: Maybe<Scalars['String']['output']>;
+  user_uuid: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregated selection of "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Aggregate = {
+  __typename?: 'trip_fuel_arla_liberado_aggregate';
+  aggregate: Maybe<Trip_Fuel_Arla_Liberado_Aggregate_Fields>;
+  nodes: Array<Trip_Fuel_Arla_Liberado>;
+};
+
+/** aggregate fields of "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Aggregate_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_aggregate_fields';
+  avg: Maybe<Trip_Fuel_Arla_Liberado_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max: Maybe<Trip_Fuel_Arla_Liberado_Max_Fields>;
+  min: Maybe<Trip_Fuel_Arla_Liberado_Min_Fields>;
+  stddev: Maybe<Trip_Fuel_Arla_Liberado_Stddev_Fields>;
+  stddev_pop: Maybe<Trip_Fuel_Arla_Liberado_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<Trip_Fuel_Arla_Liberado_Stddev_Samp_Fields>;
+  sum: Maybe<Trip_Fuel_Arla_Liberado_Sum_Fields>;
+  var_pop: Maybe<Trip_Fuel_Arla_Liberado_Var_Pop_Fields>;
+  var_samp: Maybe<Trip_Fuel_Arla_Liberado_Var_Samp_Fields>;
+  variance: Maybe<Trip_Fuel_Arla_Liberado_Variance_Fields>;
+};
+
+
+/** aggregate fields of "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Trip_Fuel_Arla_Liberado_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Trip_Fuel_Arla_Liberado_Avg_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_avg_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "trip_fuel.arla_liberado". All fields are combined with a logical 'AND'. */
+export type Trip_Fuel_Arla_Liberado_Bool_Exp = {
+  _and?: InputMaybe<Array<Trip_Fuel_Arla_Liberado_Bool_Exp>>;
+  _not?: InputMaybe<Trip_Fuel_Arla_Liberado_Bool_Exp>;
+  _or?: InputMaybe<Array<Trip_Fuel_Arla_Liberado_Bool_Exp>>;
+  erro?: InputMaybe<String_Mssql_Comparison_Exp>;
+  id_abaposto?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  liberado_em?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
+  plano?: InputMaybe<String_Mssql_Comparison_Exp>;
+  processado_em?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
+  status?: InputMaybe<String_Mssql_Comparison_Exp>;
+  user_name?: InputMaybe<String_Mssql_Comparison_Exp>;
+  user_uuid?: InputMaybe<String_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_If_Matched = {
+  match_columns?: Array<Trip_Fuel_Arla_Liberado_Insert_Match_Column>;
+  update_columns?: Array<Trip_Fuel_Arla_Liberado_Update_Column>;
+  where?: InputMaybe<Trip_Fuel_Arla_Liberado_Bool_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Inc_Input = {
+  id_abaposto?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Insert_Input = {
+  erro?: InputMaybe<Scalars['String']['input']>;
+  id_abaposto?: InputMaybe<Scalars['Int']['input']>;
+  liberado_em?: InputMaybe<Scalars['datetime']['input']>;
+  plano?: InputMaybe<Scalars['String']['input']>;
+  processado_em?: InputMaybe<Scalars['datetime']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  user_name?: InputMaybe<Scalars['String']['input']>;
+  user_uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** select match_columns of table "trip_fuel.arla_liberado" */
+export enum Trip_Fuel_Arla_Liberado_Insert_Match_Column {
+  /** column name */
+  Erro = 'erro',
+  /** column name */
+  IdAbaposto = 'id_abaposto',
+  /** column name */
+  LiberadoEm = 'liberado_em',
+  /** column name */
+  Plano = 'plano',
+  /** column name */
+  ProcessadoEm = 'processado_em',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UserName = 'user_name',
+  /** column name */
+  UserUuid = 'user_uuid'
+}
+
+/** aggregate max on columns */
+export type Trip_Fuel_Arla_Liberado_Max_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_max_fields';
+  erro: Maybe<Scalars['String']['output']>;
+  id_abaposto: Maybe<Scalars['Int']['output']>;
+  liberado_em: Maybe<Scalars['datetime']['output']>;
+  plano: Maybe<Scalars['String']['output']>;
+  processado_em: Maybe<Scalars['datetime']['output']>;
+  status: Maybe<Scalars['String']['output']>;
+  user_name: Maybe<Scalars['String']['output']>;
+  user_uuid: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Trip_Fuel_Arla_Liberado_Min_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_min_fields';
+  erro: Maybe<Scalars['String']['output']>;
+  id_abaposto: Maybe<Scalars['Int']['output']>;
+  liberado_em: Maybe<Scalars['datetime']['output']>;
+  plano: Maybe<Scalars['String']['output']>;
+  processado_em: Maybe<Scalars['datetime']['output']>;
+  status: Maybe<Scalars['String']['output']>;
+  user_name: Maybe<Scalars['String']['output']>;
+  user_uuid: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Mutation_Response = {
+  __typename?: 'trip_fuel_arla_liberado_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Trip_Fuel_Arla_Liberado>;
+};
+
+/** Ordering options when selecting data from "trip_fuel.arla_liberado". */
+export type Trip_Fuel_Arla_Liberado_Order_By = {
+  erro?: InputMaybe<Order_By>;
+  id_abaposto?: InputMaybe<Order_By>;
+  liberado_em?: InputMaybe<Order_By>;
+  plano?: InputMaybe<Order_By>;
+  processado_em?: InputMaybe<Order_By>;
+  status?: InputMaybe<Order_By>;
+  user_name?: InputMaybe<Order_By>;
+  user_uuid?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: trip_fuel.arla_liberado */
+export type Trip_Fuel_Arla_Liberado_Pk_Columns_Input = {
+  id_abaposto: Scalars['Int']['input'];
+};
+
+/** select columns of table "trip_fuel.arla_liberado" */
+export enum Trip_Fuel_Arla_Liberado_Select_Column {
+  /** column name */
+  Erro = 'erro',
+  /** column name */
+  IdAbaposto = 'id_abaposto',
+  /** column name */
+  LiberadoEm = 'liberado_em',
+  /** column name */
+  Plano = 'plano',
+  /** column name */
+  ProcessadoEm = 'processado_em',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UserName = 'user_name',
+  /** column name */
+  UserUuid = 'user_uuid'
+}
+
+/** input type for updating data in table "trip_fuel.arla_liberado" */
+export type Trip_Fuel_Arla_Liberado_Set_Input = {
+  erro?: InputMaybe<Scalars['String']['input']>;
+  id_abaposto?: InputMaybe<Scalars['Int']['input']>;
+  liberado_em?: InputMaybe<Scalars['datetime']['input']>;
+  plano?: InputMaybe<Scalars['String']['input']>;
+  processado_em?: InputMaybe<Scalars['datetime']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  user_name?: InputMaybe<Scalars['String']['input']>;
+  user_uuid?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Trip_Fuel_Arla_Liberado_Stddev_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_stddev_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Trip_Fuel_Arla_Liberado_Stddev_Pop_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_stddev_pop_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Trip_Fuel_Arla_Liberado_Stddev_Samp_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_stddev_samp_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate sum on columns */
+export type Trip_Fuel_Arla_Liberado_Sum_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_sum_fields';
+  id_abaposto: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "trip_fuel.arla_liberado" */
+export enum Trip_Fuel_Arla_Liberado_Update_Column {
+  /** column name */
+  Erro = 'erro',
+  /** column name */
+  IdAbaposto = 'id_abaposto',
+  /** column name */
+  LiberadoEm = 'liberado_em',
+  /** column name */
+  Plano = 'plano',
+  /** column name */
+  ProcessadoEm = 'processado_em',
+  /** column name */
+  Status = 'status',
+  /** column name */
+  UserName = 'user_name',
+  /** column name */
+  UserUuid = 'user_uuid'
+}
+
+/** aggregate var_pop on columns */
+export type Trip_Fuel_Arla_Liberado_Var_Pop_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_var_pop_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Trip_Fuel_Arla_Liberado_Var_Samp_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_var_samp_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Trip_Fuel_Arla_Liberado_Variance_Fields = {
+  __typename?: 'trip_fuel_arla_liberado_variance_fields';
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+};
+
 /** columns and relationships of "trip_fuel.view_excecoes" */
 export type Trip_Fuel_View_Excecoes = {
   __typename?: 'trip_fuel_view_excecoes';
@@ -105816,6 +108440,460 @@ export type Trip_Fuel_View_Vinculos_Variance_Fields = {
   viagem_abastecimento_id: Maybe<Scalars['Float']['output']>;
   viagem_id: Maybe<Scalars['Float']['output']>;
   viagens_abertas: Maybe<Scalars['Float']['output']>;
+};
+
+/** columns and relationships of "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla = {
+  __typename?: 'trip_fuel_vinculo_arla';
+  codposto: Maybe<Scalars['String']['output']>;
+  created_at: Scalars['datetime']['output'];
+  data_abastecimento: Scalars['datetime']['output'];
+  decisao: Scalars['String']['output'];
+  diesel_mesma_parada: Scalars['Int']['output'];
+  diesel_vinculado: Scalars['Int']['output'];
+  dry_run: Scalars['Boolean']['output'];
+  id_abaposto: Scalars['Int']['output'];
+  litros: Scalars['Float']['output'];
+  motivo: Maybe<Scalars['String']['output']>;
+  numviag: Scalars['String']['output'];
+  odometro: Maybe<Scalars['Int']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  placa: Scalars['String']['output'];
+  ultimo_odometro: Maybe<Scalars['Int']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  verificado_em: Scalars['datetime']['output'];
+  viagem_id: Scalars['Int']['output'];
+};
+
+/** aggregated selection of "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Aggregate = {
+  __typename?: 'trip_fuel_vinculo_arla_aggregate';
+  aggregate: Maybe<Trip_Fuel_Vinculo_Arla_Aggregate_Fields>;
+  nodes: Array<Trip_Fuel_Vinculo_Arla>;
+};
+
+/** aggregate fields of "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Aggregate_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_aggregate_fields';
+  avg: Maybe<Trip_Fuel_Vinculo_Arla_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max: Maybe<Trip_Fuel_Vinculo_Arla_Max_Fields>;
+  min: Maybe<Trip_Fuel_Vinculo_Arla_Min_Fields>;
+  stddev: Maybe<Trip_Fuel_Vinculo_Arla_Stddev_Fields>;
+  stddev_pop: Maybe<Trip_Fuel_Vinculo_Arla_Stddev_Pop_Fields>;
+  stddev_samp: Maybe<Trip_Fuel_Vinculo_Arla_Stddev_Samp_Fields>;
+  sum: Maybe<Trip_Fuel_Vinculo_Arla_Sum_Fields>;
+  var_pop: Maybe<Trip_Fuel_Vinculo_Arla_Var_Pop_Fields>;
+  var_samp: Maybe<Trip_Fuel_Vinculo_Arla_Var_Samp_Fields>;
+  variance: Maybe<Trip_Fuel_Vinculo_Arla_Variance_Fields>;
+};
+
+
+/** aggregate fields of "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Trip_Fuel_Vinculo_Arla_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Trip_Fuel_Vinculo_Arla_Avg_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_avg_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "trip_fuel.vinculo_arla". All fields are combined with a logical 'AND'. */
+export type Trip_Fuel_Vinculo_Arla_Bool_Exp = {
+  _and?: InputMaybe<Array<Trip_Fuel_Vinculo_Arla_Bool_Exp>>;
+  _not?: InputMaybe<Trip_Fuel_Vinculo_Arla_Bool_Exp>;
+  _or?: InputMaybe<Array<Trip_Fuel_Vinculo_Arla_Bool_Exp>>;
+  codposto?: InputMaybe<String_Mssql_Comparison_Exp>;
+  created_at?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
+  data_abastecimento?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
+  decisao?: InputMaybe<String_Mssql_Comparison_Exp>;
+  diesel_mesma_parada?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  diesel_vinculado?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  dry_run?: InputMaybe<Boolean_Mssql_Comparison_Exp>;
+  id_abaposto?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  litros?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  motivo?: InputMaybe<String_Mssql_Comparison_Exp>;
+  numviag?: InputMaybe<String_Mssql_Comparison_Exp>;
+  odometro?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  percentual?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  placa?: InputMaybe<String_Mssql_Comparison_Exp>;
+  ultimo_odometro?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  valor?: InputMaybe<Float_Mssql_Comparison_Exp>;
+  verificado_em?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
+  viagem_id?: InputMaybe<Int_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_If_Matched = {
+  match_columns?: Array<Trip_Fuel_Vinculo_Arla_Insert_Match_Column>;
+  update_columns?: Array<Trip_Fuel_Vinculo_Arla_Update_Column>;
+  where?: InputMaybe<Trip_Fuel_Vinculo_Arla_Bool_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Inc_Input = {
+  diesel_mesma_parada?: InputMaybe<Scalars['Int']['input']>;
+  diesel_vinculado?: InputMaybe<Scalars['Int']['input']>;
+  id_abaposto?: InputMaybe<Scalars['Int']['input']>;
+  litros?: InputMaybe<Scalars['Float']['input']>;
+  odometro?: InputMaybe<Scalars['Int']['input']>;
+  percentual?: InputMaybe<Scalars['Float']['input']>;
+  ultimo_odometro?: InputMaybe<Scalars['Int']['input']>;
+  valor?: InputMaybe<Scalars['Float']['input']>;
+  viagem_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Insert_Input = {
+  codposto?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['datetime']['input']>;
+  data_abastecimento?: InputMaybe<Scalars['datetime']['input']>;
+  decisao?: InputMaybe<Scalars['String']['input']>;
+  diesel_mesma_parada?: InputMaybe<Scalars['Int']['input']>;
+  diesel_vinculado?: InputMaybe<Scalars['Int']['input']>;
+  dry_run?: InputMaybe<Scalars['Boolean']['input']>;
+  id_abaposto?: InputMaybe<Scalars['Int']['input']>;
+  litros?: InputMaybe<Scalars['Float']['input']>;
+  motivo?: InputMaybe<Scalars['String']['input']>;
+  numviag?: InputMaybe<Scalars['String']['input']>;
+  odometro?: InputMaybe<Scalars['Int']['input']>;
+  percentual?: InputMaybe<Scalars['Float']['input']>;
+  placa?: InputMaybe<Scalars['String']['input']>;
+  ultimo_odometro?: InputMaybe<Scalars['Int']['input']>;
+  valor?: InputMaybe<Scalars['Float']['input']>;
+  verificado_em?: InputMaybe<Scalars['datetime']['input']>;
+  viagem_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** select match_columns of table "trip_fuel.vinculo_arla" */
+export enum Trip_Fuel_Vinculo_Arla_Insert_Match_Column {
+  /** column name */
+  Codposto = 'codposto',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DataAbastecimento = 'data_abastecimento',
+  /** column name */
+  Decisao = 'decisao',
+  /** column name */
+  DieselMesmaParada = 'diesel_mesma_parada',
+  /** column name */
+  DieselVinculado = 'diesel_vinculado',
+  /** column name */
+  DryRun = 'dry_run',
+  /** column name */
+  IdAbaposto = 'id_abaposto',
+  /** column name */
+  Litros = 'litros',
+  /** column name */
+  Motivo = 'motivo',
+  /** column name */
+  Numviag = 'numviag',
+  /** column name */
+  Odometro = 'odometro',
+  /** column name */
+  Percentual = 'percentual',
+  /** column name */
+  Placa = 'placa',
+  /** column name */
+  UltimoOdometro = 'ultimo_odometro',
+  /** column name */
+  Valor = 'valor',
+  /** column name */
+  VerificadoEm = 'verificado_em',
+  /** column name */
+  ViagemId = 'viagem_id'
+}
+
+/** aggregate max on columns */
+export type Trip_Fuel_Vinculo_Arla_Max_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_max_fields';
+  codposto: Maybe<Scalars['String']['output']>;
+  created_at: Maybe<Scalars['datetime']['output']>;
+  data_abastecimento: Maybe<Scalars['datetime']['output']>;
+  decisao: Maybe<Scalars['String']['output']>;
+  diesel_mesma_parada: Maybe<Scalars['Int']['output']>;
+  diesel_vinculado: Maybe<Scalars['Int']['output']>;
+  id_abaposto: Maybe<Scalars['Int']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  motivo: Maybe<Scalars['String']['output']>;
+  numviag: Maybe<Scalars['String']['output']>;
+  odometro: Maybe<Scalars['Int']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  placa: Maybe<Scalars['String']['output']>;
+  ultimo_odometro: Maybe<Scalars['Int']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  verificado_em: Maybe<Scalars['datetime']['output']>;
+  viagem_id: Maybe<Scalars['Int']['output']>;
+};
+
+/** aggregate min on columns */
+export type Trip_Fuel_Vinculo_Arla_Min_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_min_fields';
+  codposto: Maybe<Scalars['String']['output']>;
+  created_at: Maybe<Scalars['datetime']['output']>;
+  data_abastecimento: Maybe<Scalars['datetime']['output']>;
+  decisao: Maybe<Scalars['String']['output']>;
+  diesel_mesma_parada: Maybe<Scalars['Int']['output']>;
+  diesel_vinculado: Maybe<Scalars['Int']['output']>;
+  id_abaposto: Maybe<Scalars['Int']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  motivo: Maybe<Scalars['String']['output']>;
+  numviag: Maybe<Scalars['String']['output']>;
+  odometro: Maybe<Scalars['Int']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  placa: Maybe<Scalars['String']['output']>;
+  ultimo_odometro: Maybe<Scalars['Int']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  verificado_em: Maybe<Scalars['datetime']['output']>;
+  viagem_id: Maybe<Scalars['Int']['output']>;
+};
+
+/** response of any mutation on the table "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Mutation_Response = {
+  __typename?: 'trip_fuel_vinculo_arla_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Trip_Fuel_Vinculo_Arla>;
+};
+
+/** Ordering options when selecting data from "trip_fuel.vinculo_arla". */
+export type Trip_Fuel_Vinculo_Arla_Order_By = {
+  codposto?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  data_abastecimento?: InputMaybe<Order_By>;
+  decisao?: InputMaybe<Order_By>;
+  diesel_mesma_parada?: InputMaybe<Order_By>;
+  diesel_vinculado?: InputMaybe<Order_By>;
+  dry_run?: InputMaybe<Order_By>;
+  id_abaposto?: InputMaybe<Order_By>;
+  litros?: InputMaybe<Order_By>;
+  motivo?: InputMaybe<Order_By>;
+  numviag?: InputMaybe<Order_By>;
+  odometro?: InputMaybe<Order_By>;
+  percentual?: InputMaybe<Order_By>;
+  placa?: InputMaybe<Order_By>;
+  ultimo_odometro?: InputMaybe<Order_By>;
+  valor?: InputMaybe<Order_By>;
+  verificado_em?: InputMaybe<Order_By>;
+  viagem_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: trip_fuel.vinculo_arla */
+export type Trip_Fuel_Vinculo_Arla_Pk_Columns_Input = {
+  id_abaposto: Scalars['Int']['input'];
+};
+
+/** select columns of table "trip_fuel.vinculo_arla" */
+export enum Trip_Fuel_Vinculo_Arla_Select_Column {
+  /** column name */
+  Codposto = 'codposto',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DataAbastecimento = 'data_abastecimento',
+  /** column name */
+  Decisao = 'decisao',
+  /** column name */
+  DieselMesmaParada = 'diesel_mesma_parada',
+  /** column name */
+  DieselVinculado = 'diesel_vinculado',
+  /** column name */
+  DryRun = 'dry_run',
+  /** column name */
+  IdAbaposto = 'id_abaposto',
+  /** column name */
+  Litros = 'litros',
+  /** column name */
+  Motivo = 'motivo',
+  /** column name */
+  Numviag = 'numviag',
+  /** column name */
+  Odometro = 'odometro',
+  /** column name */
+  Percentual = 'percentual',
+  /** column name */
+  Placa = 'placa',
+  /** column name */
+  UltimoOdometro = 'ultimo_odometro',
+  /** column name */
+  Valor = 'valor',
+  /** column name */
+  VerificadoEm = 'verificado_em',
+  /** column name */
+  ViagemId = 'viagem_id'
+}
+
+/** input type for updating data in table "trip_fuel.vinculo_arla" */
+export type Trip_Fuel_Vinculo_Arla_Set_Input = {
+  codposto?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['datetime']['input']>;
+  data_abastecimento?: InputMaybe<Scalars['datetime']['input']>;
+  decisao?: InputMaybe<Scalars['String']['input']>;
+  diesel_mesma_parada?: InputMaybe<Scalars['Int']['input']>;
+  diesel_vinculado?: InputMaybe<Scalars['Int']['input']>;
+  dry_run?: InputMaybe<Scalars['Boolean']['input']>;
+  id_abaposto?: InputMaybe<Scalars['Int']['input']>;
+  litros?: InputMaybe<Scalars['Float']['input']>;
+  motivo?: InputMaybe<Scalars['String']['input']>;
+  numviag?: InputMaybe<Scalars['String']['input']>;
+  odometro?: InputMaybe<Scalars['Int']['input']>;
+  percentual?: InputMaybe<Scalars['Float']['input']>;
+  placa?: InputMaybe<Scalars['String']['input']>;
+  ultimo_odometro?: InputMaybe<Scalars['Int']['input']>;
+  valor?: InputMaybe<Scalars['Float']['input']>;
+  verificado_em?: InputMaybe<Scalars['datetime']['input']>;
+  viagem_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Trip_Fuel_Vinculo_Arla_Stddev_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_stddev_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Trip_Fuel_Vinculo_Arla_Stddev_Pop_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_stddev_pop_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Trip_Fuel_Vinculo_Arla_Stddev_Samp_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_stddev_samp_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate sum on columns */
+export type Trip_Fuel_Vinculo_Arla_Sum_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_sum_fields';
+  diesel_mesma_parada: Maybe<Scalars['Int']['output']>;
+  diesel_vinculado: Maybe<Scalars['Int']['output']>;
+  id_abaposto: Maybe<Scalars['Int']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Int']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Int']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Int']['output']>;
+};
+
+/** update columns of table "trip_fuel.vinculo_arla" */
+export enum Trip_Fuel_Vinculo_Arla_Update_Column {
+  /** column name */
+  Codposto = 'codposto',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  DataAbastecimento = 'data_abastecimento',
+  /** column name */
+  Decisao = 'decisao',
+  /** column name */
+  DieselMesmaParada = 'diesel_mesma_parada',
+  /** column name */
+  DieselVinculado = 'diesel_vinculado',
+  /** column name */
+  DryRun = 'dry_run',
+  /** column name */
+  IdAbaposto = 'id_abaposto',
+  /** column name */
+  Litros = 'litros',
+  /** column name */
+  Motivo = 'motivo',
+  /** column name */
+  Numviag = 'numviag',
+  /** column name */
+  Odometro = 'odometro',
+  /** column name */
+  Percentual = 'percentual',
+  /** column name */
+  Placa = 'placa',
+  /** column name */
+  UltimoOdometro = 'ultimo_odometro',
+  /** column name */
+  Valor = 'valor',
+  /** column name */
+  VerificadoEm = 'verificado_em',
+  /** column name */
+  ViagemId = 'viagem_id'
+}
+
+/** aggregate var_pop on columns */
+export type Trip_Fuel_Vinculo_Arla_Var_Pop_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_var_pop_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Trip_Fuel_Vinculo_Arla_Var_Samp_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_var_samp_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Trip_Fuel_Vinculo_Arla_Variance_Fields = {
+  __typename?: 'trip_fuel_vinculo_arla_variance_fields';
+  diesel_mesma_parada: Maybe<Scalars['Float']['output']>;
+  diesel_vinculado: Maybe<Scalars['Float']['output']>;
+  id_abaposto: Maybe<Scalars['Float']['output']>;
+  litros: Maybe<Scalars['Float']['output']>;
+  odometro: Maybe<Scalars['Float']['output']>;
+  percentual: Maybe<Scalars['Float']['output']>;
+  ultimo_odometro: Maybe<Scalars['Float']['output']>;
+  valor: Maybe<Scalars['Float']['output']>;
+  viagem_id: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "trip_fuel.vinculo_liberado" */
@@ -111188,6 +114266,19 @@ export type Trip_Trip_Updates = {
   _set?: InputMaybe<Trip_Trip_Set_Input>;
   /** filter the rows which have to be updated */
   where: Trip_Trip_Bool_Exp;
+};
+
+/** Boolean expression to compare columns of type "uniqueidentifier". All fields are combined with logical 'AND'. */
+export type Uniqueidentifier_Mssql_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  _gt?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  _gte?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  _in?: InputMaybe<Array<Scalars['uniqueidentifier']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  _lte?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  _neq?: InputMaybe<Scalars['uniqueidentifier']['input']>;
+  _nin?: InputMaybe<Array<Scalars['uniqueidentifier']['input']>>;
 };
 
 export type Update_Status_Truck_Hardware_By_Vehicle_Plates_Args = {
@@ -120985,6 +124076,35 @@ export type DeleteLiberacaoMutationVariables = Exact<{
 
 export type DeleteLiberacaoMutation = { __typename?: 'mutation_root', delete_trip_fuel_vinculo_liberado: { __typename?: 'trip_fuel_vinculo_liberado_mutation_response', affected_rows: number } | null };
 
+export type GetVinculosArlaQueryVariables = Exact<{
+  desde: Scalars['datetime']['input'];
+}>;
+
+
+export type GetVinculosArlaQuery = { __typename?: 'query_root', trip_fuel_vinculo_arla: Array<{ __typename?: 'trip_fuel_vinculo_arla', id_abaposto: number, viagem_id: number, placa: string, numviag: string, data_abastecimento: string, codposto: string | null, litros: number, odometro: number | null, ultimo_odometro: number | null, valor: number | null, percentual: number | null, diesel_mesma_parada: number, diesel_vinculado: number, decisao: string, motivo: string | null, dry_run: boolean, created_at: string, verificado_em: string }> };
+
+export type GetLiberacoesArlaQueryVariables = Exact<{
+  ids: Array<Scalars['Int']['input']> | Scalars['Int']['input'];
+}>;
+
+
+export type GetLiberacoesArlaQuery = { __typename?: 'query_root', trip_fuel_arla_liberado: Array<{ __typename?: 'trip_fuel_arla_liberado', id_abaposto: number, user_name: string | null, liberado_em: string, status: string, erro: string | null, processado_em: string | null, plano: string | null }> };
+
+export type InsertLiberacaoArlaMutationVariables = Exact<{
+  data: Trip_Fuel_Arla_Liberado_Insert_Input;
+}>;
+
+
+export type InsertLiberacaoArlaMutation = { __typename?: 'mutation_root', insert_trip_fuel_arla_liberado: { __typename?: 'trip_fuel_arla_liberado_mutation_response', affected_rows: number } | null };
+
+export type DeleteLiberacaoArlaMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  status: Array<Scalars['String']['input']> | Scalars['String']['input'];
+}>;
+
+
+export type DeleteLiberacaoArlaMutation = { __typename?: 'mutation_root', delete_trip_fuel_arla_liberado: { __typename?: 'trip_fuel_arla_liberado_mutation_response', affected_rows: number } | null };
+
 export const UserFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"User"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"admin"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"avatar_url"}}]}}]} as unknown as DocumentNode<UserFragment, unknown>;
 export const ProfilePermissionFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ProfilePermission"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"profile_permission"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"profile_uuid"}},{"kind":"Field","name":{"kind":"Name","value":"action"}},{"kind":"Field","name":{"kind":"Name","value":"deleted_at"}}]}}]} as unknown as DocumentNode<ProfilePermissionFragment, unknown>;
 export const SignInDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SignIn"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"admin_signin"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"admin_uuid"}},{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"refresh_token"}}]}}]}}]} as unknown as DocumentNode<SignInQuery, SignInQueryVariables>;
@@ -120994,3 +124114,7 @@ export const GetVinculosAbastecimentoDocument = {"kind":"Document","definitions"
 export const GetLiberacoesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLiberacoes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trip_fuel_vinculo_liberado"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"viagem_abastecimento_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viagem_abastecimento_id"}},{"kind":"Field","name":{"kind":"Name","value":"id_abaposto"}},{"kind":"Field","name":{"kind":"Name","value":"user_name"}},{"kind":"Field","name":{"kind":"Name","value":"liberado_em"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"erro"}},{"kind":"Field","name":{"kind":"Name","value":"processado_em"}},{"kind":"Field","name":{"kind":"Name","value":"lancamento_id"}}]}}]}}]} as unknown as DocumentNode<GetLiberacoesQuery, GetLiberacoesQueryVariables>;
 export const InsertLiberacaoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertLiberacao"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"trip_fuel_vinculo_liberado_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_trip_fuel_vinculo_liberado"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"data"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<InsertLiberacaoMutation, InsertLiberacaoMutationVariables>;
 export const DeleteLiberacaoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteLiberacao"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"status"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_trip_fuel_vinculo_liberado"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"viagem_abastecimento_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"status"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteLiberacaoMutation, DeleteLiberacaoMutationVariables>;
+export const GetVinculosArlaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetVinculosArla"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"desde"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"datetime"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trip_fuel_vinculo_arla"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"verificado_em"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"desde"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"verificado_em"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id_abaposto"}},{"kind":"Field","name":{"kind":"Name","value":"viagem_id"}},{"kind":"Field","name":{"kind":"Name","value":"placa"}},{"kind":"Field","name":{"kind":"Name","value":"numviag"}},{"kind":"Field","name":{"kind":"Name","value":"data_abastecimento"}},{"kind":"Field","name":{"kind":"Name","value":"codposto"}},{"kind":"Field","name":{"kind":"Name","value":"litros"}},{"kind":"Field","name":{"kind":"Name","value":"odometro"}},{"kind":"Field","name":{"kind":"Name","value":"ultimo_odometro"}},{"kind":"Field","name":{"kind":"Name","value":"valor"}},{"kind":"Field","name":{"kind":"Name","value":"percentual"}},{"kind":"Field","name":{"kind":"Name","value":"diesel_mesma_parada"}},{"kind":"Field","name":{"kind":"Name","value":"diesel_vinculado"}},{"kind":"Field","name":{"kind":"Name","value":"decisao"}},{"kind":"Field","name":{"kind":"Name","value":"motivo"}},{"kind":"Field","name":{"kind":"Name","value":"dry_run"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"verificado_em"}}]}}]}}]} as unknown as DocumentNode<GetVinculosArlaQuery, GetVinculosArlaQueryVariables>;
+export const GetLiberacoesArlaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetLiberacoesArla"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"ids"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"trip_fuel_arla_liberado"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id_abaposto"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"ids"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id_abaposto"}},{"kind":"Field","name":{"kind":"Name","value":"user_name"}},{"kind":"Field","name":{"kind":"Name","value":"liberado_em"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"erro"}},{"kind":"Field","name":{"kind":"Name","value":"processado_em"}},{"kind":"Field","name":{"kind":"Name","value":"plano"}}]}}]}}]} as unknown as DocumentNode<GetLiberacoesArlaQuery, GetLiberacoesArlaQueryVariables>;
+export const InsertLiberacaoArlaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertLiberacaoArla"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"trip_fuel_arla_liberado_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_trip_fuel_arla_liberado"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"ListValue","values":[{"kind":"Variable","name":{"kind":"Name","value":"data"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<InsertLiberacaoArlaMutation, InsertLiberacaoArlaMutationVariables>;
+export const DeleteLiberacaoArlaDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteLiberacaoArla"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"status"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_trip_fuel_arla_liberado"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id_abaposto"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_in"},"value":{"kind":"Variable","name":{"kind":"Name","value":"status"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"affected_rows"}}]}}]}}]} as unknown as DocumentNode<DeleteLiberacaoArlaMutation, DeleteLiberacaoArlaMutationVariables>;

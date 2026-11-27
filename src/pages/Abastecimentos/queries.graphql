@@ -79,3 +79,65 @@ mutation DeleteLiberacao($id: Int!, $status: [String!]!) {
     affected_rows
   }
 }
+
+# ----------------------------------------------------------------------
+
+# the bot's decisions on ARLA: each one becomes a single expense, with no
+# forecast, so the fueling itself (id_abaposto) is the key. As on diesel, a
+# pending one is checked again on every run
+query GetVinculosArla($desde: datetime!) {
+  trip_fuel_vinculo_arla(
+    where: { verificado_em: { _gte: $desde } }
+    order_by: { verificado_em: desc }
+  ) {
+    id_abaposto
+    viagem_id
+    placa
+    numviag
+    data_abastecimento
+    codposto
+    litros
+    odometro
+    ultimo_odometro
+    valor
+    percentual
+    diesel_mesma_parada
+    diesel_vinculado
+    decisao
+    motivo
+    dry_run
+    created_at
+    verificado_em
+  }
+}
+
+# ----------------------------------------------------------------------
+
+# the ARLA someone released to the bot: it writes only these
+query GetLiberacoesArla($ids: [Int!]!) {
+  trip_fuel_arla_liberado(where: { id_abaposto: { _in: $ids } }) {
+    id_abaposto
+    user_name
+    liberado_em
+    status
+    erro
+    processado_em
+    plano
+  }
+}
+
+mutation InsertLiberacaoArla($data: trip_fuel_arla_liberado_insert_input!) {
+  insert_trip_fuel_arla_liberado(objects: [$data]) {
+    affected_rows
+  }
+}
+
+# as on diesel, Hasura's delete permission allows just 'liberado', 'erro' and
+# 'recusado'
+mutation DeleteLiberacaoArla($id: Int!, $status: [String!]!) {
+  delete_trip_fuel_arla_liberado(
+    where: { id_abaposto: { _eq: $id }, status: { _in: $status } }
+  ) {
+    affected_rows
+  }
+}

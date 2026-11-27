@@ -1,14 +1,44 @@
+import { DateRange } from '@fluxu-labs/lib';
+import { endOfDay, startOfDay, subDays } from 'date-fns';
 import {
+  DeleteLiberacaoArlaDocument,
+  DeleteLiberacaoArlaMutation,
+  DeleteLiberacaoArlaMutationVariables,
   DeleteLiberacaoDocument,
   DeleteLiberacaoMutation,
   DeleteLiberacaoMutationVariables,
+  GetLiberacoesArlaQuery,
   GetLiberacoesQuery,
   GetVinculosAbastecimentoQuery,
+  GetVinculosArlaQuery,
+  InsertLiberacaoArlaDocument,
+  InsertLiberacaoArlaMutation,
+  InsertLiberacaoArlaMutationVariables,
   InsertLiberacaoDocument,
   InsertLiberacaoMutation,
   InsertLiberacaoMutationVariables,
 } from 'src/@types/generated/types';
 import { apolloClient } from 'src/utils/apollo';
+
+// ----------------------------------------------------------------------
+
+// the bot runs every 15 min: a minute is enough to follow it
+export const POLL_MS = 60_000;
+
+/** What the person has to look at, first. */
+export type Filtro = 'para_liberar' | 'excecoes' | 'liberados' | 'todos';
+
+export const FILTRO_LABELS: Record<Filtro, string> = {
+  para_liberar: 'Para liberar',
+  excecoes: 'Exceções',
+  liberados: 'Liberados',
+  todos: 'Todos',
+};
+
+export const ultimos7Dias = (): DateRange => ({
+  start: startOfDay(subDays(new Date(), 6)),
+  end: endOfDay(new Date()),
+});
 
 // ----------------------------------------------------------------------
 
@@ -101,12 +131,14 @@ export const MODO_OBSERVACAO = true;
  * system (e.g. linked again through the screen: a double expense, which the
  * Protheus does not undo). The bot keeps the alert in `erro`.
  */
-export const gravadoComAlerta = (liberacao: Liberacao | undefined) =>
-  liberacao?.status === 'gravado' && !!liberacao.erro;
+export const gravadoComAlerta = (
+  liberacao: Pick<Liberacao, 'status' | 'erro'> | undefined,
+) => liberacao?.status === 'gravado' && !!liberacao.erro;
 
 /** A release that ended without writing, and can be made again. */
-export const liberacaoEncerrada = (liberacao: Liberacao | undefined) =>
-  liberacao?.status === 'erro' || liberacao?.status === 'recusado';
+export const liberacaoEncerrada = (
+  liberacao: Pick<Liberacao, 'status'> | undefined,
+) => liberacao?.status === 'erro' || liberacao?.status === 'recusado';
 
 /** A link the bot would write and nobody released yet (or again). */
 export const podeLiberar = (
@@ -185,6 +217,76 @@ export const liberacaoService = {
 
 // ----------------------------------------------------------------------
 
+export type Arla = GetVinculosArlaQuery['trip_fuel_vinculo_arla'][number];
+
+export type LiberacaoArla =
+  GetLiberacoesArlaQuery['trip_fuel_arla_liberado'][number];
+
+// the bot's reasons to wait or to leave an ARLA to the operator
+export const MOTIVO_ARLA_LABELS: Record<string, string> = {
+  diesel_pendente: 'Aguardando o diesel da mesma parada ser vinculado',
+  sem_diesel_mesma_parada: 'Nenhum diesel com o mesmo odômetro',
+  odometro_menor: 'Odômetro menor que o do último abastecimento vinculado',
+  varios_arla: 'Mais de um ARLA no mesmo odômetro (venda duplicada?)',
+  sem_odometro: 'Abastecimento sem odômetro',
+  sem_valor: 'Abastecimento sem valor',
+};
+
+/** An ARLA the bot would write and nobody released yet (or again). */
+export const podeLiberarArla = (
+  arla: Arla,
+  liberacao: LiberacaoArla | undefined,
+): boolean =>
+  (!liberacao || liberacaoEncerrada(liberacao)) && arla.decisao === 'vincular';
+
+export const liberacaoArlaService = {
+  // status and liberado_em take the table's defaults, and user_uuid is set by
+  // Hasura from the session
+  liberar: async ({ arla, user_name }: { arla: Arla; user_name: string }) => {
+    await apolloClient.mutate<
+      InsertLiberacaoArlaMutation,
+      InsertLiberacaoArlaMutationVariables
+    >({
+      mutation: InsertLiberacaoArlaDocument,
+      variables: { data: { id_abaposto: arla.id_abaposto, user_name } },
+    });
+  },
+
+  cancelar: async (id_abaposto: number) => {
+    const result = await apolloClient.mutate<
+      DeleteLiberacaoArlaMutation,
+      DeleteLiberacaoArlaMutationVariables
+    >({
+      mutation: DeleteLiberacaoArlaDocument,
+      variables: { id: id_abaposto, status: ['liberado'] },
+    });
+    // the bot took it in between
+    if (!result.data?.delete_trip_fuel_arla_liberado?.affected_rows) {
+      throw new Error('O bot já processou esta liberação.');
+    }
+  },
+
+  /** drops the release that ended in error or refused, and makes a new one */
+  liberarDeNovo: async ({
+    arla,
+    user_name,
+  }: {
+    arla: Arla;
+    user_name: string;
+  }) => {
+    await apolloClient.mutate<
+      DeleteLiberacaoArlaMutation,
+      DeleteLiberacaoArlaMutationVariables
+    >({
+      mutation: DeleteLiberacaoArlaDocument,
+      variables: { id: arla.id_abaposto, status: ['erro', 'recusado'] },
+    });
+    await liberacaoArlaService.liberar({ arla, user_name });
+  },
+};
+
+// ----------------------------------------------------------------------
+
 export const formatNumero = (
   value: number | null | undefined,
   sufixo: string,
@@ -194,3 +296,8 @@ export const formatNumero = (
   const texto = value.toLocaleString('pt-br', { maximumFractionDigits: 1 });
   return `${sinal && value > 0 ? '+' : ''}${texto} ${sufixo}`;
 };
+
+export const formatMoeda = (value: number | null | undefined): string =>
+  value === null || value === undefined
+    ? '-'
+    : value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
